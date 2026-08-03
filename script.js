@@ -6,34 +6,34 @@
 // ─── Contact Data (Edit this object with your info) ───
 const contactData = {
   // Personal
-  firstName: 'Danny',
-  lastName: 'Flores Soledispa',
-  fullName: 'Danny Flores Soledispa',
-  title: 'Director de Operaciones y Finanzas',
-  company: 'Ingeniería & Consultoría S.A.',
-  bio: 'Ingeniero Civil Industrial · Master en Project Management. Apasionado por la optimización de procesos y la gestión estratégica de proyectos.',
+  firstName: 'Ingresar:',
+  lastName: '',
+  fullName: 'Ingresar:',
+  title: 'Ingresar:',
+  company: 'Ingresar:',
+  bio: 'Ingresar:',
 
   // Contact
-  phone: '+56 9 1234 5678',
-  phoneClean: '+56912345678',
-  email: 'danny.flores@empresa.com',
-  website: 'https://www.empresa.com',
-  address: 'Santiago, Chile',
-  addressMap: 'https://maps.google.com/?q=Santiago+Chile',
+  phone: 'Ingresar:',
+  phoneClean: '',
+  email: 'Ingresar:',
+  website: 'Ingresar:',
+  address: 'Ingresar:',
+  addressMap: '',
 
   // Social
-  whatsapp: '56912345678',
-  whatsappMessage: '¡Hola Danny! Vi tu tarjeta de contacto y me gustaría conectar contigo.',
-  linkedin: 'https://www.linkedin.com/in/dannyflores',
-  instagram: 'https://www.instagram.com/dannyflores',
-  facebook: 'https://www.facebook.com/dannyflores',
-  twitter: 'https://www.x.com/dannyflores',
+  whatsapp: '',
+  whatsappMessage: '',
+  linkedin: '',
+  instagram: '',
+  facebook: '',
+  twitter: '',
   tiktok: '',
   youtube: '',
 
   // Card
   cardUrl: window.location.href,
-  avatarUrl: 'assets/avatar.jpg',
+  avatarUrl: 'assets/fotorolando.png',
   bannerUrl: 'assets/banner.jpg',
 };
 
@@ -70,7 +70,24 @@ function renderCard() {
   setText('detailAddress', contactData.address);
   setText('detailWebsite', contactData.website.replace(/^https?:\/\/(www\.)?/, ''));
 
-  // Social Links - hide if empty
+  // Social Links - hide section if empty
+  const hasSocials = Boolean(
+    contactData.linkedin ||
+    contactData.instagram ||
+    contactData.facebook ||
+    contactData.twitter ||
+    contactData.tiktok ||
+    contactData.youtube
+  );
+  const socialsSection = document.querySelector('.vcard__socials');
+  if (socialsSection) {
+    socialsSection.style.display = hasSocials ? '' : 'none';
+    const prevDivider = socialsSection.previousElementSibling;
+    if (prevDivider && prevDivider.classList.contains('vcard__divider')) {
+      prevDivider.style.display = hasSocials ? '' : 'none';
+    }
+  }
+
   setSocialLink('socialLinkedin', contactData.linkedin);
   setSocialLink('socialInstagram', contactData.instagram);
   setSocialLink('socialFacebook', contactData.facebook);
@@ -107,27 +124,27 @@ function bindEvents() {
 
   // Quick Actions
   document.getElementById('qaPhone')?.addEventListener('click', () => {
-    window.open(`tel:${contactData.phoneClean}`);
+    if (contactData.phoneClean) window.open(`tel:${contactData.phoneClean}`);
   });
 
   document.getElementById('qaEmail')?.addEventListener('click', () => {
-    window.open(`mailto:${contactData.email}`);
+    if (contactData.email && contactData.email !== 'Ingresar:') window.open(`mailto:${contactData.email}`);
   });
 
   document.getElementById('qaWhatsapp')?.addEventListener('click', () => {
-    openWhatsApp();
+    if (contactData.whatsapp) openWhatsApp();
   });
 
   document.getElementById('qaWebsite')?.addEventListener('click', () => {
-    window.open(contactData.website, '_blank');
+    if (contactData.website && contactData.website !== 'Ingresar:') window.open(contactData.website, '_blank');
   });
 
   document.getElementById('qaMap')?.addEventListener('click', () => {
-    window.open(contactData.addressMap, '_blank');
+    if (contactData.addressMap) window.open(contactData.addressMap, '_blank');
   });
 
   document.getElementById('qaLinkedin')?.addEventListener('click', () => {
-    window.open(contactData.linkedin, '_blank');
+    if (contactData.linkedin) window.open(contactData.linkedin, '_blank');
   });
 
   // Share Modal
@@ -142,19 +159,19 @@ function bindEvents() {
 
   // Contact detail rows
   document.getElementById('detailPhoneRow')?.addEventListener('click', () => {
-    window.open(`tel:${contactData.phoneClean}`);
+    if (contactData.phoneClean) window.open(`tel:${contactData.phoneClean}`);
   });
 
   document.getElementById('detailEmailRow')?.addEventListener('click', () => {
-    window.open(`mailto:${contactData.email}`);
+    if (contactData.email && contactData.email !== 'Ingresar:') window.open(`mailto:${contactData.email}`);
   });
 
   document.getElementById('detailWebsiteRow')?.addEventListener('click', () => {
-    window.open(contactData.website, '_blank');
+    if (contactData.website && contactData.website !== 'Ingresar:') window.open(contactData.website, '_blank');
   });
 
   document.getElementById('detailAddressRow')?.addEventListener('click', () => {
-    window.open(contactData.addressMap, '_blank');
+    if (contactData.addressMap) window.open(contactData.addressMap, '_blank');
   });
 
   // Keyboard: Escape closes modal
