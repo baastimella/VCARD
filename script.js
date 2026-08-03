@@ -9,9 +9,9 @@ const contactData = {
   firstName: 'Rolando',
   lastName: 'Silva',
   fullName: 'Rolando Silva',
-  title: 'Ingresar Titulo:',
-  company: 'Ingresar nombre',
-  bio: 'Ingresar biografia de presentacion:',
+  title: 'CEO Fundador',
+  company: 'Gestio',
+  bio: 'Entregamos soluciones a Pymes y Empresas para que puedan impulsar la transformación digital mediante tecnologia inteligente, automatización y analisis de datos, permitiendo a nuestros clientes controlar su negocio, optimizar sus procesos y tener información eficaz y oportuna.',
 
   // Contact
   phone: '+56 9 2878 6139',
