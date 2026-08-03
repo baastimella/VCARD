@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+  <meta name="theme-color" content="#0f172a">
+
+  <!-- SEO -->
+  <title>Danny Flores Soledispa - Tarjeta de Contacto</title>
+  <meta name="description" content="Director de Operaciones y Finanzas · Ingeniero Civil Industrial · Master en Project Management. Comparte y guarda mi contacto fácilmente.">
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Danny Flores Soledispa - Tarjeta de Contacto">
+  <meta property="og:description" content="Director de Operaciones y Finanzas · Ingeniero Civil Industrial · Master en Project Management">
+  <meta property="og:image" content="assets/avatar.jpg">
+  <meta property="og:url" content="">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Danny Flores Soledispa - Tarjeta de Contacto">
+  <meta name="twitter:description" content="Director de Operaciones y Finanzas · Ingeniero Civil Industrial · Master en Project Management">
+  <meta name="twitter:image" content="assets/avatar.jpg">
+
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📇</text></svg>">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- QR Code Library -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+  <!-- ─── Card ─── -->
+  <article class="vcard" itemscope itemtype="https://schema.org/Person">
+
+    <!-- Banner -->
+    <header class="vcard__banner">
+      <img id="bannerImg" class="vcard__banner-img" src="assets/banner.jpg" alt="Banner" loading="eager">
+    </header>
+
+    <!-- Avatar -->
+    <div class="vcard__avatar-wrapper">
+      <img id="avatarImg" class="vcard__avatar" src="assets/avatar.jpg" alt="Danny Flores Soledispa" itemprop="image" loading="eager">
+      <span class="vcard__status" title="Disponible"></span>
+    </div>
+
+    <!-- Action Bar -->
+    <div class="vcard__actions-bar">
+      <button class="vcard__action-btn" id="btnSaveContact" aria-label="Guardar contacto">
+        <i class="fa-solid fa-address-book"></i>
+        <span>Guardar Contacto</span>
+      </button>
+      <button class="vcard__action-btn" id="btnShare" aria-label="Compartir tarjeta">
+        <i class="fa-solid fa-share-nodes"></i>
+        <span>Compartir</span>
+      </button>
+    </div>
+
+    <!-- Profile Info -->
+    <section class="vcard__info">
+      <h1 class="vcard__name" id="profileName" itemprop="name">Danny Flores Soledispa</h1>
+      <p class="vcard__title" id="profileTitle" itemprop="jobTitle">Director de Operaciones y Finanzas</p>
+      <p class="vcard__company" id="profileCompany" itemprop="worksFor">Ingeniería & Consultoría S.A.</p>
+      <p class="vcard__bio" id="profileBio">Ingeniero Civil Industrial · Master en Project Management. Apasionado por la optimización de procesos y la gestión estratégica de proyectos.</p>
+    </section>
+
+    <!-- Quick Actions -->
+    <nav class="vcard__quick-actions" aria-label="Acciones rápidas">
+      <button class="vcard__quick-action" id="qaPhone" title="Llamar">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <span class="vcard__quick-action-label">Llamar</span>
+      </button>
+      <button class="vcard__quick-action" id="qaEmail" title="Email">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <span class="vcard__quick-action-label">Email</span>
+      </button>
+      <button class="vcard__quick-action vcard__quick-action--whatsapp" id="qaWhatsapp" title="WhatsApp">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <span class="vcard__quick-action-label">WhatsApp</span>
+      </button>
+      <button class="vcard__quick-action" id="qaWebsite" title="Sitio Web">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+        <span class="vcard__quick-action-label">Web</span>
+      </button>
+      <button class="vcard__quick-action" id="qaMap" title="Ubicación">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <span class="vcard__quick-action-label">Mapa</span>
+      </button>
+      <button class="vcard__quick-action" id="qaLinkedin" title="LinkedIn">
+        <div class="vcard__quick-action-icon">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </div>
+        <span class="vcard__quick-action-label">LinkedIn</span>
+      </button>
+    </nav>
+
+    <div class="vcard__divider"></div>
+
+    <!-- Contact Details -->
+    <section class="vcard__details" aria-label="Datos de contacto">
+      <button class="vcard__detail" id="detailPhoneRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Teléfono</div>
+          <div class="vcard__detail-value" id="detailPhone" itemprop="telephone">+56 9 1234 5678</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
+      <button class="vcard__detail" id="detailEmailRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Email</div>
+          <div class="vcard__detail-value" id="detailEmail" itemprop="email">danny.flores@empresa.com</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
+      <button class="vcard__detail" id="detailCompanyRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-building"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Empresa</div>
+          <div class="vcard__detail-value" id="detailCompany">Ingeniería & Consultoría S.A.</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
+      <button class="vcard__detail" id="detailAddressRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-location-dot"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Ubicación</div>
+          <div class="vcard__detail-value" id="detailAddress" itemprop="address">Santiago, Chile</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
+      <button class="vcard__detail" id="detailWebsiteRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-globe"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Sitio Web</div>
+          <div class="vcard__detail-value" id="detailWebsite" itemprop="url">empresa.com</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+    </section>
+
+    <div class="vcard__divider"></div>
+
+    <!-- Social Links -->
+    <section class="vcard__socials" aria-label="Redes sociales">
+      <h2 class="vcard__socials-title">Redes Sociales</h2>
+      <div class="vcard__socials-grid">
+        <a class="vcard__social-link vcard__social-link--linkedin" id="socialLinkedin" href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+          <i class="fa-brands fa-linkedin-in"></i>
+        </a>
+        <a class="vcard__social-link vcard__social-link--instagram" id="socialInstagram" href="#" target="_blank" rel="noopener noreferrer" title="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a class="vcard__social-link vcard__social-link--facebook" id="socialFacebook" href="#" target="_blank" rel="noopener noreferrer" title="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a class="vcard__social-link vcard__social-link--twitter" id="socialTwitter" href="#" target="_blank" rel="noopener noreferrer" title="X (Twitter)">
+          <i class="fa-brands fa-x-twitter"></i>
+        </a>
+        <a class="vcard__social-link vcard__social-link--tiktok" id="socialTiktok" href="#" target="_blank" rel="noopener noreferrer" title="TikTok" style="display:none;">
+          <i class="fa-brands fa-tiktok"></i>
+        </a>
+        <a class="vcard__social-link vcard__social-link--youtube" id="socialYoutube" href="#" target="_blank" rel="noopener noreferrer" title="YouTube" style="display:none;">
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+      </div>
+    </section>
+
+    <div class="vcard__divider"></div>
+
+    <!-- QR Code -->
+    <section class="vcard__qr-section" aria-label="Código QR">
+      <div class="vcard__qr-card">
+        <div class="vcard__qr-code" id="qrCode"></div>
+        <p class="vcard__qr-text">
+          <i class="fa-solid fa-qrcode"></i>
+          Escanea para compartir
+        </p>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="vcard__footer">
+      <p class="vcard__footer-text">
+        Hecho con <i class="fa-solid fa-heart" style="color: #ef4444;"></i> — 
+        <a href="#">VCARD</a>
+      </p>
+    </footer>
+
+  </article>
+
+  <!-- ─── Share Modal ─── -->
+  <div class="vcard-modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="vcard-modal">
+      <div class="vcard-modal__header">
+        <h3 class="vcard-modal__title" id="modalTitle">Compartir Tarjeta</h3>
+        <button class="vcard-modal__close" id="modalClose" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="vcard-modal__options">
+        <button class="vcard-modal__option vcard-modal__option--whatsapp" id="shareWhatsapp">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Compartir por WhatsApp</span>
+        </button>
+        <button class="vcard-modal__option vcard-modal__option--copy" id="shareCopyLink">
+          <i class="fa-solid fa-link"></i>
+          <span>Copiar enlace</span>
+        </button>
+        <button class="vcard-modal__option" id="shareNative">
+          <i class="fa-solid fa-share-from-square"></i>
+          <span>Más opciones...</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ─── Script ─── -->
+  <script src="script.js"></script>
+
+</body>
+
+</html>

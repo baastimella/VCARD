@@ -1,0 +1,862 @@
+/* ============================================
+   VCARD - Digital Contact Card
+   Premium Stylesheet
+   ============================================ */
+
+/* --- Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+
+/* --- CSS Custom Properties --- */
+:root {
+  /* Colors */
+  --primary: #0f172a;
+  --primary-light: #1e293b;
+  --accent: #3b82f6;
+  --accent-dark: #2563eb;
+  --accent-light: #60a5fa;
+  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+  --accent-gradient-hover: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
+  --surface: #ffffff;
+  --surface-dim: #f8fafc;
+  --surface-hover: #f1f5f9;
+  --bg: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --border: #e2e8f0;
+  --border-light: #f1f5f9;
+  --success: #10b981;
+  --whatsapp: #25d366;
+  --danger: #ef4444;
+
+  /* Shadows */
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
+  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
+  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.2);
+  --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.03);
+  --shadow-avatar: 0 8px 24px rgba(15, 23, 42, 0.18);
+  --shadow-icon: 0 4px 14px rgba(59, 130, 246, 0.3);
+
+  /* Radii */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+  --radius-full: 9999px;
+
+  /* Transitions */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-fast: 0.2s var(--ease-out);
+  --transition-base: 0.3s var(--ease-out);
+  --transition-slow: 0.5s var(--ease-out);
+
+  /* Spacing */
+  --card-padding: 28px;
+  --banner-height: 200px;
+  --avatar-size: 130px;
+  --avatar-border: 5px;
+}
+
+/* --- Reset & Base --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* --- Card Container --- */
+.vcard {
+  width: 100%;
+  max-width: 460px;
+  background: var(--surface);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+  position: relative;
+  animation: cardFadeIn 0.8s var(--ease-out) both;
+}
+
+@keyframes cardFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* --- Banner --- */
+.vcard__banner {
+  position: relative;
+  height: var(--banner-height);
+  overflow: hidden;
+}
+
+.vcard__banner-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s var(--ease-out);
+}
+
+.vcard:hover .vcard__banner-img {
+  transform: scale(1.03);
+}
+
+.vcard__banner::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+  pointer-events: none;
+}
+
+/* --- Avatar --- */
+.vcard__avatar-wrapper {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin-top: calc(var(--avatar-size) / -2);
+  z-index: 10;
+  animation: avatarPop 0.6s var(--ease-spring) 0.3s both;
+}
+
+@keyframes avatarPop {
+  from {
+    opacity: 0;
+    transform: scale(0.5) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.vcard__avatar {
+  width: var(--avatar-size);
+  height: var(--avatar-size);
+  border-radius: 50%;
+  border: var(--avatar-border) solid var(--surface);
+  box-shadow: var(--shadow-avatar);
+  object-fit: cover;
+  display: block;
+  transition: var(--transition-base);
+}
+
+.vcard__avatar:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22);
+}
+
+/* Status badge */
+.vcard__status {
+  position: absolute;
+  bottom: 6px;
+  right: calc(50% - var(--avatar-size) / 2 + 8px);
+  width: 22px;
+  height: 22px;
+  background: var(--success);
+  border: 3px solid var(--surface);
+  border-radius: 50%;
+  z-index: 11;
+}
+
+.vcard__status::after {
+  content: '';
+  position: absolute;
+  inset: 2px;
+  border-radius: 50%;
+  background: var(--success);
+  animation: statusPulse 2s ease-in-out infinite;
+}
+
+@keyframes statusPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(0.85); }
+}
+
+/* --- Action Bar --- */
+.vcard__actions-bar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--border);
+  margin-top: 20px;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.4s both;
+}
+
+.vcard__action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px;
+  background: var(--surface);
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.vcard__action-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--accent-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.vcard__action-btn:hover {
+  color: var(--surface);
+}
+
+.vcard__action-btn:hover::before {
+  opacity: 1;
+}
+
+.vcard__action-btn:hover i,
+.vcard__action-btn:hover span {
+  position: relative;
+  z-index: 1;
+  color: var(--surface);
+}
+
+.vcard__action-btn i {
+  font-size: 1rem;
+  color: var(--accent);
+  transition: color var(--transition-fast);
+}
+
+.vcard__action-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.vcard__action-btn:active {
+  transform: scale(0.97);
+}
+
+/* --- Profile Info --- */
+.vcard__info {
+  padding: 24px var(--card-padding) 8px;
+  text-align: center;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.5s both;
+}
+
+.vcard__name {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.3;
+  margin-bottom: 6px;
+}
+
+.vcard__title {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--accent);
+  margin-bottom: 4px;
+}
+
+.vcard__company {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+}
+
+.vcard__bio {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  max-width: 360px;
+  margin: 0 auto;
+}
+
+/* --- Quick Actions (Circular Icons) --- */
+.vcard__quick-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  padding: 24px var(--card-padding);
+  flex-wrap: wrap;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.6s both;
+}
+
+.vcard__quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  outline: none;
+}
+
+.vcard__quick-action-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--surface);
+  background: var(--accent-gradient);
+  box-shadow: var(--shadow-icon);
+  transition: var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.vcard__quick-action-icon::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
+}
+
+.vcard__quick-action:hover .vcard__quick-action-icon {
+  transform: translateY(-4px) scale(1.1);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
+}
+
+.vcard__quick-action:active .vcard__quick-action-icon {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.vcard__quick-action-label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* WhatsApp-specific */
+.vcard__quick-action--whatsapp .vcard__quick-action-icon {
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+}
+
+.vcard__quick-action--whatsapp:hover .vcard__quick-action-icon {
+  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+}
+
+/* --- Divider --- */
+.vcard__divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+  margin: 0 var(--card-padding);
+}
+
+/* --- Contact Details --- */
+.vcard__details {
+  padding: 20px var(--card-padding);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.7s both;
+}
+
+.vcard__detail {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: inherit;
+  transition: var(--transition-fast);
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: inherit;
+  width: 100%;
+  text-align: left;
+}
+
+.vcard__detail:hover {
+  background: var(--surface-hover);
+  transform: translateX(4px);
+}
+
+.vcard__detail:active {
+  background: var(--border-light);
+  transform: translateX(2px);
+}
+
+.vcard__detail-icon {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  color: var(--accent);
+  background: rgba(59, 130, 246, 0.08);
+  transition: var(--transition-fast);
+}
+
+.vcard__detail:hover .vcard__detail-icon {
+  background: var(--accent-gradient);
+  color: var(--surface);
+  transform: scale(1.05);
+}
+
+.vcard__detail-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.vcard__detail-label {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  margin-bottom: 2px;
+}
+
+.vcard__detail-value {
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.vcard__detail-arrow {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  opacity: 0;
+  transform: translateX(-8px);
+  transition: var(--transition-fast);
+}
+
+.vcard__detail:hover .vcard__detail-arrow {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* --- Social Links --- */
+.vcard__socials {
+  padding: 8px var(--card-padding) 20px;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.8s both;
+}
+
+.vcard__socials-title {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  padding-left: 4px;
+}
+
+.vcard__socials-grid {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.vcard__social-link {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  color: var(--text-secondary);
+  background: var(--surface-dim);
+  text-decoration: none;
+  transition: var(--transition-base);
+  border: 1px solid var(--border-light);
+}
+
+.vcard__social-link:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-md);
+}
+
+.vcard__social-link--linkedin:hover {
+  background: #0a66c2;
+  color: white;
+  border-color: #0a66c2;
+}
+
+.vcard__social-link--instagram:hover {
+  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
+  color: white;
+  border-color: transparent;
+}
+
+.vcard__social-link--facebook:hover {
+  background: #1877f2;
+  color: white;
+  border-color: #1877f2;
+}
+
+.vcard__social-link--twitter:hover {
+  background: #0f172a;
+  color: white;
+  border-color: #0f172a;
+}
+
+.vcard__social-link--tiktok:hover {
+  background: #010101;
+  color: white;
+  border-color: #010101;
+}
+
+.vcard__social-link--youtube:hover {
+  background: #ff0000;
+  color: white;
+  border-color: #ff0000;
+}
+
+.vcard__social-link--web:hover {
+  background: var(--accent-gradient);
+  color: white;
+  border-color: transparent;
+}
+
+/* --- QR Code Section --- */
+.vcard__qr-section {
+  padding: 24px var(--card-padding) 28px;
+  text-align: center;
+  animation: fadeSlideUp 0.5s var(--ease-out) 0.9s both;
+}
+
+.vcard__qr-card {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 24px 32px;
+  border-radius: var(--radius-xl);
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  transition: var(--transition-base);
+}
+
+.vcard__qr-card:hover {
+  box-shadow: var(--shadow-lg);
+  transform: translateY(-2px);
+}
+
+.vcard__qr-code {
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: white;
+  padding: 8px;
+}
+
+.vcard__qr-code canvas,
+.vcard__qr-code img {
+  width: 100% !important;
+  height: 100% !important;
+  display: block;
+}
+
+.vcard__qr-text {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.vcard__qr-text i {
+  margin-right: 6px;
+  color: var(--accent);
+}
+
+/* --- Footer --- */
+.vcard__footer {
+  padding: 18px var(--card-padding);
+  text-align: center;
+  border-top: 1px solid var(--border-light);
+  animation: fadeSlideUp 0.5s var(--ease-out) 1s both;
+}
+
+.vcard__footer-text {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.vcard__footer-text a {
+  color: var(--accent);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color var(--transition-fast);
+}
+
+.vcard__footer-text a:hover {
+  color: var(--accent-dark);
+}
+
+/* --- Shared Animation --- */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- Toast Notification --- */
+.vcard-toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  padding: 14px 28px;
+  background: var(--primary);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: 0.85rem;
+  font-weight: 600;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: var(--shadow-2xl);
+  z-index: 1000;
+  opacity: 0;
+  transition: all 0.4s var(--ease-spring);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.vcard-toast.show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.vcard-toast i {
+  margin-right: 8px;
+}
+
+/* --- Share Modal --- */
+.vcard-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 900;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s var(--ease-out);
+  padding: 24px;
+}
+
+.vcard-modal-overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.vcard-modal {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  border-radius: var(--radius-2xl) var(--radius-2xl) var(--radius-lg) var(--radius-lg);
+  padding: 28px;
+  box-shadow: var(--shadow-2xl);
+  transform: translateY(40px);
+  transition: transform 0.4s var(--ease-spring);
+}
+
+.vcard-modal-overlay.show .vcard-modal {
+  transform: translateY(0);
+}
+
+.vcard-modal__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.vcard-modal__title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.vcard-modal__close {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: none;
+  background: var(--surface-dim);
+  color: var(--text-secondary);
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-fast);
+}
+
+.vcard-modal__close:hover {
+  background: var(--surface-hover);
+  color: var(--text-primary);
+}
+
+.vcard-modal__options {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.vcard-modal__option {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  border: none;
+  background: var(--surface-dim);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  transition: var(--transition-fast);
+  width: 100%;
+  text-align: left;
+}
+
+.vcard-modal__option:hover {
+  background: var(--surface-hover);
+  transform: translateX(4px);
+}
+
+.vcard-modal__option i {
+  font-size: 1.15rem;
+  width: 24px;
+  text-align: center;
+  color: var(--accent);
+}
+
+.vcard-modal__option--whatsapp i {
+  color: var(--whatsapp);
+}
+
+.vcard-modal__option--copy i {
+  color: var(--text-secondary);
+}
+
+/* --- Responsive --- */
+@media (max-width: 520px) {
+  body {
+    padding: 0;
+    align-items: flex-start;
+    background: var(--surface);
+  }
+
+  .vcard {
+    max-width: 100%;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
+  }
+
+  :root {
+    --card-padding: 22px;
+    --banner-height: 180px;
+    --avatar-size: 115px;
+  }
+}
+
+@media (min-width: 521px) and (max-width: 768px) {
+  :root {
+    --card-padding: 24px;
+  }
+}
+
+/* --- Print Styles --- */
+@media print {
+  body {
+    background: white;
+    padding: 0;
+  }
+
+  .vcard {
+    box-shadow: none;
+    border: 1px solid #ddd;
+  }
+
+  .vcard__action-btn,
+  .vcard__quick-action,
+  .vcard-toast,
+  .vcard-modal-overlay {
+    display: none !important;
+  }
+}
+
+/* --- Reduced Motion --- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
