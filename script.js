@@ -6,24 +6,24 @@
 // ─── Contact Data (Edit this object with your info) ───
 const contactData = {
   // Personal
-  firstName: 'Ingresar:',
-  lastName: '',
-  fullName: 'Ingresar:',
-  title: 'Ingresar:',
-  company: 'Ingresar:',
-  bio: 'Ingresar:',
+  firstName: 'Rolando',
+  lastName: 'Silva',
+  fullName: 'Rolando Silva',
+  title: 'Ingresar Titulo:',
+  company: 'Ingresar nombre',
+  bio: 'Ingresar biografia de presentacion:',
 
   // Contact
-  phone: 'Ingresar:',
-  phoneClean: '',
-  email: 'Ingresar:',
-  website: 'Ingresar:',
-  address: 'Ingresar:',
+  phone: '+56 9 2878 6139',
+  phoneClean: '56928786139',
+  email: 'rsilva@gestio.pro',
+  website: 'https://gestio.pro',
+  address: 'Temuco, Chile',
   addressMap: '',
 
   // Social
-  whatsapp: '',
-  whatsappMessage: '',
+  whatsapp: '56928786139',
+  whatsappMessage: '¡Hola Rolando! Vi tu tarjeta de contacto y me gustaría conectar contigo.',
   linkedin: '',
   instagram: '',
   facebook: '',
@@ -137,10 +137,6 @@ function bindEvents() {
 
   document.getElementById('qaWebsite')?.addEventListener('click', () => {
     if (contactData.website && contactData.website !== 'Ingresar:') window.open(contactData.website, '_blank');
-  });
-
-  document.getElementById('qaMap')?.addEventListener('click', () => {
-    if (contactData.addressMap) window.open(contactData.addressMap, '_blank');
   });
 
   document.getElementById('qaLinkedin')?.addEventListener('click', () => {
