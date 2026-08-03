@@ -1,51 +1,56 @@
 /* ============================================
    VCARD - Digital Contact Card
-   Premium Stylesheet
+   Futuristic Tech & AI Edition
    ============================================ */
 
 /* --- Google Fonts --- */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 
 /* --- CSS Custom Properties --- */
 :root {
-  /* Colors */
-  --primary: #0f172a;
-  --primary-light: #1e293b;
-  --accent: #3b82f6;
-  --accent-dark: #2563eb;
-  --accent-light: #60a5fa;
-  --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
-  --accent-gradient-hover: linear-gradient(135deg, #2563eb 0%, #0891b2 100%);
-  --surface: #ffffff;
-  --surface-dim: #f8fafc;
-  --surface-hover: #f1f5f9;
-  --bg: #f1f5f9;
-  --text-primary: #0f172a;
-  --text-secondary: #475569;
-  --text-muted: #94a3b8;
-  --border: #e2e8f0;
-  --border-light: #f1f5f9;
-  --success: #10b981;
-  --whatsapp: #25d366;
-  --danger: #ef4444;
+  /* Futuristic Tech Palette */
+  --bg-dark: #080d1a;
+  --card-bg: rgba(15, 23, 42, 0.78);
+  --card-bg-solid: #0f172a;
+  --surface-item: rgba(30, 41, 59, 0.6);
+  --surface-item-hover: rgba(51, 65, 85, 0.8);
 
-  /* Shadows */
-  --shadow-xs: 0 1px 2px rgba(15, 23, 42, 0.05);
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.06);
-  --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.06);
-  --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
-  --shadow-xl: 0 20px 25px -5px rgba(15, 23, 42, 0.1), 0 8px 10px -6px rgba(15, 23, 42, 0.06);
-  --shadow-2xl: 0 25px 50px -12px rgba(15, 23, 42, 0.2);
-  --shadow-card: 0 18px 45px rgba(15, 23, 42, 0.12), 0 0 0 1px rgba(15, 23, 42, 0.03);
-  --shadow-avatar: 0 8px 24px rgba(15, 23, 42, 0.18);
-  --shadow-icon: 0 4px 14px rgba(59, 130, 246, 0.3);
+  /* Neon Accents */
+  --neon-cyan: #00f2fe;
+  --neon-blue: #38bdf8;
+  --neon-purple: #818cf8;
+  --neon-violet: #a855f7;
+  --neon-pink: #ec4899;
+
+  /* Gradients */
+  --gradient-main: linear-gradient(135deg, #00f2fe 0%, #4facfe 40%, #00c6ff 100%);
+  --gradient-glow: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  --gradient-btn: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%);
+  --gradient-btn-hover: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  --gradient-text: linear-gradient(135deg, #ffffff 30%, #38bdf8 70%, #818cf8 100%);
+  --gradient-title: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+
+  /* Text Colors */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-accent: #38bdf8;
+
+  /* Borders & Glows */
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-neon: rgba(56, 189, 248, 0.25);
+  --border-neon-hover: rgba(56, 189, 248, 0.6);
+  --glow-cyan: 0 0 20px rgba(0, 242, 254, 0.35);
+  --glow-blue: 0 0 20px rgba(56, 189, 248, 0.35);
+  --glow-purple: 0 0 25px rgba(129, 140, 248, 0.3);
+  --glow-card: 0 25px 60px -15px rgba(0, 242, 254, 0.18), 0 0 40px -10px rgba(129, 140, 248, 0.15);
 
   /* Radii */
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
+  --radius-2xl: 28px;
   --radius-full: 9999px;
 
   /* Transitions */
@@ -53,13 +58,11 @@
   --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
   --transition-fast: 0.2s var(--ease-out);
   --transition-base: 0.3s var(--ease-out);
-  --transition-slow: 0.5s var(--ease-out);
 
-  /* Spacing */
+  /* Dimensions */
   --card-padding: 28px;
-  --banner-height: 200px;
-  --avatar-size: 130px;
-  --avatar-border: 5px;
+  --banner-height: 210px;
+  --avatar-size: 132px;
 }
 
 /* --- Reset & Base --- */
@@ -77,8 +80,13 @@ html {
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  background: var(--bg);
+  font-family: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--bg-dark);
+  background-image: 
+    radial-gradient(circle at 15% 15%, rgba(0, 242, 254, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.12) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.06) 0%, transparent 60%);
+  background-attachment: fixed;
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
@@ -87,25 +95,56 @@ body {
   justify-content: center;
   padding: 24px;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+  overflow-x: hidden;
 }
 
-/* --- Card Container --- */
+/* Animated ambient particle grid in background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- Futuristic Card Container --- */
 .vcard {
   width: 100%;
   max-width: 460px;
-  background: var(--surface);
+  background: var(--card-bg);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   border-radius: var(--radius-2xl);
-  box-shadow: var(--shadow-card);
+  border: 1px solid var(--border-neon);
+  box-shadow: var(--glow-card);
   overflow: hidden;
   position: relative;
-  animation: cardFadeIn 0.8s var(--ease-out) both;
+  z-index: 1;
+  animation: cardEntrance 0.9s var(--ease-out) both;
 }
 
-@keyframes cardFadeIn {
+/* Futuristic glowing animated top rim line */
+.vcard::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--gradient-glow);
+  z-index: 20;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.8);
+}
+
+@keyframes cardEntrance {
   from {
     opacity: 0;
-    transform: translateY(30px) scale(0.97);
+    transform: translateY(40px) scale(0.95);
   }
   to {
     opacity: 1;
@@ -125,38 +164,42 @@ body {
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.6s var(--ease-out);
+  filter: brightness(0.9) contrast(1.1);
+  transition: transform 0.8s var(--ease-out), filter 0.8s var(--ease-out);
 }
 
 .vcard:hover .vcard__banner-img {
-  transform: scale(1.03);
+  transform: scale(1.05);
+  filter: brightness(1) contrast(1.15);
 }
 
 .vcard__banner::after {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(to top, rgba(255, 255, 255, 0.9) 0%, transparent 100%);
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(8, 13, 26, 0.1) 0%,
+    rgba(8, 13, 26, 0.6) 60%,
+    var(--card-bg-solid) 100%
+  );
   pointer-events: none;
 }
 
-/* --- Avatar --- */
+/* --- Avatar with Futuristic Hologram Glow Ring --- */
 .vcard__avatar-wrapper {
   position: relative;
   display: flex;
   justify-content: center;
   margin-top: calc(var(--avatar-size) / -2);
   z-index: 10;
-  animation: avatarPop 0.6s var(--ease-spring) 0.3s both;
+  animation: avatarPop 0.7s var(--ease-spring) 0.2s both;
 }
 
 @keyframes avatarPop {
   from {
     opacity: 0;
-    transform: scale(0.5) translateY(20px);
+    transform: scale(0.4) translateY(20px);
   }
   to {
     opacity: 1;
@@ -168,84 +211,103 @@ body {
   width: var(--avatar-size);
   height: var(--avatar-size);
   border-radius: 50%;
-  border: var(--avatar-border) solid var(--surface);
-  box-shadow: var(--shadow-avatar);
+  border: 4px solid #0f172a;
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.5), 0 0 30px rgba(0, 242, 254, 0.4);
   object-fit: cover;
   display: block;
   transition: var(--transition-base);
+  background: #0f172a;
 }
 
-.vcard__avatar:hover {
-  transform: scale(1.05);
-  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.22);
+.vcard__avatar-wrapper:hover .vcard__avatar {
+  transform: scale(1.06);
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.8), 0 0 40px rgba(0, 242, 254, 0.6);
 }
 
-/* Status badge */
+/* Glowing Online Status Indicator */
 .vcard__status {
   position: absolute;
-  bottom: 6px;
-  right: calc(50% - var(--avatar-size) / 2 + 8px);
-  width: 22px;
-  height: 22px;
-  background: var(--success);
-  border: 3px solid var(--surface);
+  bottom: 8px;
+  right: calc(50% - var(--avatar-size) / 2 + 10px);
+  width: 20px;
+  height: 20px;
+  background: #10b981;
+  border: 3px solid #0f172a;
   border-radius: 50%;
+  box-shadow: 0 0 10px rgba(16, 185, 129, 0.8);
   z-index: 11;
 }
 
 .vcard__status::after {
   content: '';
   position: absolute;
-  inset: 2px;
+  inset: -3px;
   border-radius: 50%;
-  background: var(--success);
+  border: 2px solid #10b981;
   animation: statusPulse 2s ease-in-out infinite;
 }
 
 @keyframes statusPulse {
-  0%, 100% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(0.85); }
+  0% { transform: scale(1); opacity: 0.9; }
+  100% { transform: scale(1.8); opacity: 0; }
 }
 
 /* --- Action Bar --- */
 .vcard__actions-bar {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 1px;
-  background: var(--border);
+  gap: 12px;
+  padding: 0 var(--card-padding);
   margin-top: 20px;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.4s both;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.3s both;
 }
 
 .vcard__action-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
-  padding: 14px 16px;
-  background: var(--surface);
-  border: none;
+  gap: 10px;
+  padding: 13px 18px;
+  background: var(--gradient-btn);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-lg);
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  color: var(--text-secondary);
-  transition: var(--transition-fast);
+  color: var(--text-primary);
+  transition: var(--transition-base);
   position: relative;
   overflow: hidden;
+  backdrop-filter: blur(10px);
 }
 
 .vcard__action-btn::before {
   content: '';
   position: absolute;
   inset: 0;
-  background: var(--accent-gradient);
+  background: var(--gradient-glow);
   opacity: 0;
-  transition: opacity var(--transition-fast);
+  transition: opacity var(--transition-base);
+  z-index: 0;
+}
+
+.vcard__action-btn i,
+.vcard__action-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+.vcard__action-btn i {
+  font-size: 1.05rem;
+  color: var(--neon-cyan);
+  transition: color var(--transition-fast);
 }
 
 .vcard__action-btn:hover {
-  color: var(--surface);
+  border-color: rgba(56, 189, 248, 0.8);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
 }
 
 .vcard__action-btn:hover::before {
@@ -254,72 +316,79 @@ body {
 
 .vcard__action-btn:hover i,
 .vcard__action-btn:hover span {
-  position: relative;
-  z-index: 1;
-  color: var(--surface);
-}
-
-.vcard__action-btn i {
-  font-size: 1rem;
-  color: var(--accent);
-  transition: color var(--transition-fast);
-}
-
-.vcard__action-btn span {
-  position: relative;
-  z-index: 1;
+  color: #0f172a;
 }
 
 .vcard__action-btn:active {
-  transform: scale(0.97);
+  transform: translateY(0) scale(0.98);
 }
 
 /* --- Profile Info --- */
 .vcard__info {
   padding: 24px var(--card-padding) 8px;
   text-align: center;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.5s both;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.4s both;
 }
 
 .vcard__name {
-  font-size: 1.55rem;
+  font-size: 1.7rem;
   font-weight: 800;
-  color: var(--text-primary);
   letter-spacing: -0.02em;
-  line-height: 1.3;
+  line-height: 1.25;
   margin-bottom: 6px;
+  background: var(--gradient-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 10px 30px rgba(0, 242, 254, 0.15);
 }
 
 .vcard__title {
-  font-size: 0.92rem;
-  font-weight: 500;
-  color: var(--accent);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--neon-cyan);
+  letter-spacing: 0.02em;
   margin-bottom: 4px;
+  text-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
 }
 
 .vcard__company {
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: var(--text-secondary);
-  margin-bottom: 12px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--neon-purple);
+  background: rgba(129, 140, 248, 0.12);
+  padding: 4px 14px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(129, 140, 248, 0.25);
+  margin-bottom: 14px;
+}
+
+.vcard__company::before {
+  content: '⚡';
+  font-size: 0.8rem;
 }
 
 .vcard__bio {
-  font-size: 0.82rem;
-  color: var(--text-muted);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
   line-height: 1.65;
-  max-width: 360px;
+  max-width: 380px;
   margin: 0 auto;
+  font-weight: 400;
 }
 
-/* --- Quick Actions (Circular Icons) --- */
+/* --- Quick Actions (Futuristic Floating Orbs) --- */
 .vcard__quick-actions {
   display: flex;
   justify-content: center;
   gap: 16px;
   padding: 24px var(--card-padding);
   flex-wrap: wrap;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.6s both;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.5s both;
 }
 
 .vcard__quick-action {
@@ -343,111 +412,101 @@ body {
   align-items: center;
   justify-content: center;
   font-size: 1.2rem;
-  color: var(--surface);
-  background: var(--accent-gradient);
-  box-shadow: var(--shadow-icon);
+  color: var(--text-primary);
+  background: rgba(30, 41, 59, 0.8);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
   transition: var(--transition-base);
   position: relative;
-  overflow: hidden;
-}
-
-.vcard__quick-action-icon::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, transparent 60%);
 }
 
 .vcard__quick-action:hover .vcard__quick-action-icon {
-  transform: translateY(-4px) scale(1.1);
-  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.45);
-}
-
-.vcard__quick-action:active .vcard__quick-action-icon {
-  transform: translateY(-1px) scale(1.02);
+  transform: translateY(-5px) scale(1.1);
+  background: var(--gradient-glow);
+  color: #0f172a;
+  border-color: transparent;
+  box-shadow: var(--glow-cyan);
 }
 
 .vcard__quick-action-label {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 600;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.05em;
+  transition: var(--transition-fast);
 }
 
-/* WhatsApp-specific */
-.vcard__quick-action--whatsapp .vcard__quick-action-icon {
-  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
-  box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+.vcard__quick-action:hover .vcard__quick-action-label {
+  color: var(--neon-cyan);
 }
 
+/* WhatsApp Specific Glow */
 .vcard__quick-action--whatsapp:hover .vcard__quick-action-icon {
-  box-shadow: 0 8px 24px rgba(37, 211, 102, 0.5);
+  background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+  color: white;
+  box-shadow: 0 0 25px rgba(37, 211, 102, 0.5);
 }
 
-/* --- Divider --- */
+/* --- Futuristic Neon Divider --- */
 .vcard__divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+  background: linear-gradient(90deg, transparent 0%, rgba(56, 189, 248, 0.3) 50%, transparent 100%);
   margin: 0 var(--card-padding);
 }
 
-/* --- Contact Details --- */
+/* --- Contact Details (Glass Cards) --- */
 .vcard__details {
   padding: 20px var(--card-padding);
   display: flex;
   flex-direction: column;
-  gap: 4px;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.7s both;
+  gap: 8px;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.6s both;
 }
 
 .vcard__detail {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 12px 16px;
-  border-radius: var(--radius-md);
+  padding: 13px 18px;
+  border-radius: var(--radius-lg);
+  background: var(--surface-item);
+  border: 1px solid var(--border-glass);
   text-decoration: none;
   color: inherit;
-  transition: var(--transition-fast);
+  transition: var(--transition-base);
   cursor: pointer;
-  border: none;
-  background: none;
-  font-family: inherit;
-  font-size: inherit;
   width: 100%;
   text-align: left;
 }
 
 .vcard__detail:hover {
-  background: var(--surface-hover);
-  transform: translateX(4px);
-}
-
-.vcard__detail:active {
-  background: var(--border-light);
-  transform: translateX(2px);
+  background: var(--surface-item-hover);
+  border-color: var(--border-neon-hover);
+  transform: translateX(5px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(56, 189, 248, 0.15);
 }
 
 .vcard__detail-icon {
-  width: 40px;
-  height: 40px;
-  min-width: 40px;
-  border-radius: var(--radius-sm);
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 0.95rem;
-  color: var(--accent);
-  background: rgba(59, 130, 246, 0.08);
-  transition: var(--transition-fast);
+  font-size: 1rem;
+  color: var(--neon-cyan);
+  background: rgba(0, 242, 254, 0.08);
+  border: 1px solid rgba(0, 242, 254, 0.2);
+  transition: var(--transition-base);
 }
 
 .vcard__detail:hover .vcard__detail-icon {
-  background: var(--accent-gradient);
-  color: var(--surface);
-  transform: scale(1.05);
+  background: var(--gradient-glow);
+  color: #0f172a;
+  border-color: transparent;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.4);
 }
 
 .vcard__detail-content {
@@ -456,16 +515,16 @@ body {
 }
 
 .vcard__detail-label {
-  font-size: 0.7rem;
-  font-weight: 600;
+  font-size: 0.68rem;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
   margin-bottom: 2px;
 }
 
 .vcard__detail-value {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   font-weight: 500;
   color: var(--text-primary);
   white-space: nowrap;
@@ -475,21 +534,21 @@ body {
 
 .vcard__detail-arrow {
   color: var(--text-muted);
-  font-size: 0.75rem;
-  opacity: 0;
-  transform: translateX(-8px);
+  font-size: 0.8rem;
+  opacity: 0.4;
   transition: var(--transition-fast);
 }
 
 .vcard__detail:hover .vcard__detail-arrow {
   opacity: 1;
-  transform: translateX(0);
+  color: var(--neon-cyan);
+  transform: translateX(3px);
 }
 
 /* --- Social Links --- */
 .vcard__socials {
-  padding: 8px var(--card-padding) 20px;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.8s both;
+  padding: 12px var(--card-padding) 20px;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.7s both;
 }
 
 .vcard__socials-title {
@@ -504,77 +563,41 @@ body {
 
 .vcard__socials-grid {
   display: flex;
-  gap: 10px;
+  gap: 12px;
   flex-wrap: wrap;
 }
 
 .vcard__social-link {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: var(--radius-md);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   color: var(--text-secondary);
-  background: var(--surface-dim);
+  background: var(--surface-item);
+  border: 1px solid var(--border-glass);
   text-decoration: none;
   transition: var(--transition-base);
-  border: 1px solid var(--border-light);
 }
 
 .vcard__social-link:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-md);
-}
-
-.vcard__social-link--linkedin:hover {
-  background: #0a66c2;
+  transform: translateY(-4px);
   color: white;
-  border-color: #0a66c2;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.vcard__social-link--instagram:hover {
-  background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888);
-  color: white;
-  border-color: transparent;
-}
+.vcard__social-link--linkedin:hover { background: #0a66c2; border-color: #0a66c2; box-shadow: 0 0 20px rgba(10, 102, 194, 0.5); }
+.vcard__social-link--instagram:hover { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366); border-color: transparent; box-shadow: 0 0 20px rgba(220, 39, 67, 0.5); }
+.vcard__social-link--facebook:hover { background: #1877f2; border-color: #1877f2; box-shadow: 0 0 20px rgba(24, 119, 242, 0.5); }
+.vcard__social-link--twitter:hover { background: #38bdf8; color: #0f172a; border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.5); }
 
-.vcard__social-link--facebook:hover {
-  background: #1877f2;
-  color: white;
-  border-color: #1877f2;
-}
-
-.vcard__social-link--twitter:hover {
-  background: #0f172a;
-  color: white;
-  border-color: #0f172a;
-}
-
-.vcard__social-link--tiktok:hover {
-  background: #010101;
-  color: white;
-  border-color: #010101;
-}
-
-.vcard__social-link--youtube:hover {
-  background: #ff0000;
-  color: white;
-  border-color: #ff0000;
-}
-
-.vcard__social-link--web:hover {
-  background: var(--accent-gradient);
-  color: white;
-  border-color: transparent;
-}
-
-/* --- QR Code Section --- */
+/* --- QR Code Section (Cyber Hologram Style) --- */
 .vcard__qr-section {
   padding: 24px var(--card-padding) 28px;
   text-align: center;
-  animation: fadeSlideUp 0.5s var(--ease-out) 0.9s both;
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.8s both;
 }
 
 .vcard__qr-card {
@@ -584,23 +607,26 @@ body {
   gap: 16px;
   padding: 24px 32px;
   border-radius: var(--radius-xl);
-  background: var(--surface-dim);
-  border: 1px solid var(--border);
+  background: rgba(30, 41, 59, 0.5);
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
   transition: var(--transition-base);
 }
 
 .vcard__qr-card:hover {
-  box-shadow: var(--shadow-lg);
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: var(--glow-blue);
   transform: translateY(-2px);
 }
 
 .vcard__qr-code {
-  width: 160px;
-  height: 160px;
+  width: 150px;
+  height: 150px;
   border-radius: var(--radius-md);
   overflow: hidden;
   background: white;
-  padding: 8px;
+  padding: 10px;
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
 }
 
 .vcard__qr-code canvas,
@@ -611,51 +637,41 @@ body {
 }
 
 .vcard__qr-text {
-  font-size: 0.78rem;
-  font-weight: 500;
-  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  letter-spacing: 0.04em;
 }
 
 .vcard__qr-text i {
   margin-right: 6px;
-  color: var(--accent);
+  color: var(--neon-cyan);
 }
 
 /* --- Footer --- */
 .vcard__footer {
   padding: 18px var(--card-padding);
   text-align: center;
-  border-top: 1px solid var(--border-light);
-  animation: fadeSlideUp 0.5s var(--ease-out) 1s both;
+  border-top: 1px solid var(--border-glass);
+  background: rgba(8, 13, 26, 0.4);
 }
 
 .vcard__footer-text {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: var(--text-muted);
   font-weight: 500;
 }
 
 .vcard__footer-text a {
-  color: var(--accent);
+  color: var(--neon-cyan);
   text-decoration: none;
-  font-weight: 600;
+  font-weight: 700;
   transition: color var(--transition-fast);
 }
 
 .vcard__footer-text a:hover {
-  color: var(--accent-dark);
-}
-
-/* --- Shared Animation --- */
-@keyframes fadeSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  color: var(--neon-purple);
+  text-shadow: 0 0 10px rgba(168, 85, 247, 0.5);
 }
 
 /* --- Toast Notification --- */
@@ -665,13 +681,13 @@ body {
   left: 50%;
   transform: translateX(-50%) translateY(100px);
   padding: 14px 28px;
-  background: var(--primary);
+  background: #0f172a;
+  border: 1px solid var(--neon-cyan);
   color: white;
   border-radius: var(--radius-full);
-  font-size: 0.85rem;
+  font-size: 0.88rem;
   font-weight: 600;
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  box-shadow: var(--shadow-2xl);
+  box-shadow: 0 10px 40px rgba(0, 242, 254, 0.3);
   z-index: 1000;
   opacity: 0;
   transition: all 0.4s var(--ease-spring);
@@ -686,15 +702,16 @@ body {
 
 .vcard-toast i {
   margin-right: 8px;
+  color: var(--neon-cyan);
 }
 
 /* --- Share Modal --- */
 .vcard-modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.5);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(8, 13, 26, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   z-index: 900;
   display: flex;
   align-items: flex-end;
@@ -713,10 +730,11 @@ body {
 .vcard-modal {
   width: 100%;
   max-width: 400px;
-  background: var(--surface);
-  border-radius: var(--radius-2xl) var(--radius-2xl) var(--radius-lg) var(--radius-lg);
+  background: #0f172a;
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-2xl);
   padding: 28px;
-  box-shadow: var(--shadow-2xl);
+  box-shadow: var(--glow-card);
   transform: translateY(40px);
   transition: transform 0.4s var(--ease-spring);
 }
@@ -733,7 +751,7 @@ body {
 }
 
 .vcard-modal__title {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 700;
   color: var(--text-primary);
 }
@@ -742,8 +760,8 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 50%;
-  border: none;
-  background: var(--surface-dim);
+  border: 1px solid var(--border-glass);
+  background: var(--surface-item);
   color: var(--text-secondary);
   font-size: 1rem;
   cursor: pointer;
@@ -754,28 +772,28 @@ body {
 }
 
 .vcard-modal__close:hover {
-  background: var(--surface-hover);
-  color: var(--text-primary);
+  background: var(--surface-item-hover);
+  color: white;
 }
 
 .vcard-modal__options {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .vcard-modal__option {
   display: flex;
   align-items: center;
   gap: 14px;
-  padding: 14px 16px;
-  border-radius: var(--radius-md);
-  border: none;
-  background: var(--surface-dim);
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background: var(--surface-item);
   cursor: pointer;
   font-family: inherit;
-  font-size: 0.9rem;
-  font-weight: 500;
+  font-size: 0.92rem;
+  font-weight: 600;
   color: var(--text-primary);
   transition: var(--transition-fast);
   width: 100%;
@@ -783,80 +801,49 @@ body {
 }
 
 .vcard-modal__option:hover {
-  background: var(--surface-hover);
+  background: var(--surface-item-hover);
+  border-color: var(--border-neon-hover);
   transform: translateX(4px);
 }
 
 .vcard-modal__option i {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   width: 24px;
   text-align: center;
-  color: var(--accent);
+  color: var(--neon-cyan);
 }
 
-.vcard-modal__option--whatsapp i {
-  color: var(--whatsapp);
+.vcard-modal__option--whatsapp i { color: #25d366; }
+
+/* Shared Animations */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.vcard-modal__option--copy i {
-  color: var(--text-secondary);
-}
-
-/* --- Responsive --- */
+/* Responsive */
 @media (max-width: 520px) {
   body {
     padding: 0;
     align-items: flex-start;
-    background: var(--surface);
   }
 
   .vcard {
     max-width: 100%;
     border-radius: 0;
-    box-shadow: none;
+    border: none;
     min-height: 100vh;
   }
 
   :root {
     --card-padding: 22px;
-    --banner-height: 180px;
-    --avatar-size: 115px;
-  }
-}
-
-@media (min-width: 521px) and (max-width: 768px) {
-  :root {
-    --card-padding: 24px;
-  }
-}
-
-/* --- Print Styles --- */
-@media print {
-  body {
-    background: white;
-    padding: 0;
-  }
-
-  .vcard {
-    box-shadow: none;
-    border: 1px solid #ddd;
-  }
-
-  .vcard__action-btn,
-  .vcard__quick-action,
-  .vcard-toast,
-  .vcard-modal-overlay {
-    display: none !important;
-  }
-}
-
-/* --- Reduced Motion --- */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
+    --banner-height: 190px;
+    --avatar-size: 118px;
   }
 }
