@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ─── Render Card Content ───
 function renderCard() {
+  // Page title
+  document.title = `${contactData.fullName} - Tarjeta de Contacto`;
+
   // Banner
   const bannerImg = document.getElementById('bannerImg');
   if (bannerImg) bannerImg.src = contactData.bannerUrl;
