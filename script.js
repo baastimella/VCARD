@@ -18,8 +18,10 @@ const contactData = {
   phoneClean: '56928786139',
   email: 'rsilva@gestio.pro',
   website: 'https://gestio.pro',
-  address: 'Temuco, Chile',
-  addressMap: '',
+  address: 'Antonio Varas 854, Temuco, Chile',
+  addressMap: 'https://www.google.com/maps/place/Antonio+Varas+854,+Temuco,+Araucan%C3%ADa/@-38.7406869,-72.5926986,726m/data=!3m2!1e3!4b1!4m6!3m5!1s0x9614d3de0b4af34d:0xb5c30f5cecf32a9d!8m2!3d-38.7406869!4d-72.5901183!16s%2Fg%2F11lg2krtvy?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D',
+  calendarUrl: 'https://calendar.google.com/calendar/appointments/schedules/AcZssZ1YZ6mgmklSUwVek7bLF1GsSGkHDFhnGw7btJe0vNFbQTA_MMQmL0j7nCjCJtE7tCdbj3LwXD4W',
+  videoUrl: 'https://www.youtube.com/embed/VfkN70YAM2Y',
 
   // Social
   whatsapp: '56928786139',
@@ -142,8 +144,8 @@ function bindEvents() {
     if (contactData.website && contactData.website !== 'Ingresar:') window.open(contactData.website, '_blank');
   });
 
-  document.getElementById('qaLinkedin')?.addEventListener('click', () => {
-    if (contactData.linkedin) window.open(contactData.linkedin, '_blank');
+  document.getElementById('qaCalendar')?.addEventListener('click', () => {
+    if (contactData.calendarUrl) window.open(contactData.calendarUrl, '_blank');
   });
 
   // Share Modal
@@ -163,6 +165,10 @@ function bindEvents() {
 
   document.getElementById('detailEmailRow')?.addEventListener('click', () => {
     if (contactData.email && contactData.email !== 'Ingresar:') window.open(`mailto:${contactData.email}`);
+  });
+
+  document.getElementById('detailCalendarRow')?.addEventListener('click', () => {
+    if (contactData.calendarUrl) window.open(contactData.calendarUrl, '_blank');
   });
 
   document.getElementById('detailWebsiteRow')?.addEventListener('click', () => {

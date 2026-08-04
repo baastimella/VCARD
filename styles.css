@@ -545,6 +545,55 @@ body::before {
   transform: translateX(3px);
 }
 
+/* --- Video Section --- */
+.vcard__video-section {
+  padding: 20px var(--card-padding);
+  animation: fadeSlideUp 0.6s var(--ease-out) 0.65s both;
+}
+
+.vcard__section-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.vcard__section-title i {
+  color: var(--neon-cyan);
+}
+
+.vcard__video-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-neon);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.2);
+  background: #000;
+  transition: var(--transition-base);
+}
+
+.vcard__video-container:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.5), var(--glow-cyan);
+}
+
+.vcard__video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
 /* --- Social Links --- */
 .vcard__socials {
   padding: 12px var(--card-padding) 20px;

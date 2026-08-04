@@ -108,11 +108,11 @@
         </div>
         <span class="vcard__quick-action-label">Web</span>
       </button>
-      <button class="vcard__quick-action" id="qaLinkedin" title="LinkedIn">
+      <button class="vcard__quick-action" id="qaCalendar" title="Agendar Reunión">
         <div class="vcard__quick-action-icon">
-          <i class="fa-brands fa-linkedin-in"></i>
+          <i class="fa-solid fa-calendar-check"></i>
         </div>
-        <span class="vcard__quick-action-label">LinkedIn</span>
+        <span class="vcard__quick-action-label">Agendar</span>
       </button>
     </nav>
 
@@ -120,6 +120,17 @@
 
     <!-- Contact Details -->
     <section class="vcard__details" aria-label="Datos de contacto">
+      <button class="vcard__detail" id="detailCalendarRow">
+        <div class="vcard__detail-icon">
+          <i class="fa-solid fa-calendar-check"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Reunión</div>
+          <div class="vcard__detail-value" id="detailCalendar">Agendar Cita en Google Calendar</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
       <button class="vcard__detail" id="detailPhoneRow">
         <div class="vcard__detail-icon">
           <i class="fa-solid fa-phone"></i>
@@ -159,7 +170,7 @@
         </div>
         <div class="vcard__detail-content">
           <div class="vcard__detail-label">Ubicación</div>
-          <div class="vcard__detail-value" id="detailAddress" itemprop="address">Temuco, Chile</div>
+          <div class="vcard__detail-value" id="detailAddress" itemprop="address">Antonio Varas 854, Temuco, Chile</div>
         </div>
         <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
       </button>
@@ -178,14 +189,22 @@
 
     <div class="vcard__divider"></div>
 
+    <!-- Video Section -->
+    <section class="vcard__video-section" aria-label="Video de presentación">
+      <h2 class="vcard__section-title">
+        <i class="fa-solid fa-play"></i> Presentación
+      </h2>
+      <div class="vcard__video-container">
+        <iframe src="https://www.youtube-nocookie.com/embed/VfkN70YAM2Y" title="Video de presentación" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <div class="vcard__divider"></div>
+
     <!-- Social Links -->
     <section class="vcard__socials" aria-label="Redes sociales">
       <h2 class="vcard__socials-title">Redes Sociales</h2>
       <div class="vcard__socials-grid">
-        <a class="vcard__social-link vcard__social-link--linkedin" id="socialLinkedin" href="#" target="_blank"
-          rel="noopener noreferrer" title="LinkedIn">
-          <i class="fa-brands fa-linkedin-in"></i>
-        </a>
         <a class="vcard__social-link vcard__social-link--instagram" id="socialInstagram" href="#" target="_blank"
           rel="noopener noreferrer" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
