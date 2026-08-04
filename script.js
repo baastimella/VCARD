@@ -34,7 +34,7 @@ const contactData = {
   // Card
   cardUrl: window.location.href,
   avatarUrl: 'assets/fotorolando.png',
-  bannerUrl: 'assets/banner.jpg',
+  bannerUrl: 'assets/fondo.jpeg',
 };
 
 // ─── Initialize ───
