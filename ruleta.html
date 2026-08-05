@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gira la Ruleta Gestio y Gana - Transformación Digital</title>
+  <meta name="description" content="Concurso Gira la Ruleta Gestio. Gana páginas web gratis, 50% y 30% de descuento, y asesorías gratuitas para postulación a CORFO y SERCOTEC.">
+  <link rel="icon" href="assets/logogestio.jpeg" type="image/jpeg">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Canvas Confetti -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.85);
+      --border-glass: rgba(56, 189, 248, 0.25);
+      --neon-cyan: #00f2fe;
+      --neon-gold: #ffd700;
+      --neon-purple: #818cf8;
+      --whatsapp-green: #25d366;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --radius-lg: 24px;
+      --radius-md: 14px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 10% 10%, rgba(0, 242, 254, 0.15) 0px, transparent 50%),
+        radial-gradient(at 90% 90%, rgba(255, 215, 0, 0.12) 0px, transparent 50%),
+        radial-gradient(at 50% 50%, rgba(129, 140, 248, 0.1) 0px, transparent 70%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px 15px 50px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 540px;
+    }
+
+    /* Card Layout */
+    .ruleta-card {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(0, 242, 254, 0.15);
+      overflow: hidden;
+      position: relative;
+    }
+
+    /* Header Banner */
+    .ruleta-header {
+      position: relative;
+      height: 150px;
+      overflow: hidden;
+      text-align: center;
+    }
+
+    .ruleta-header__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.55);
+    }
+
+    .ruleta-header__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 0%, var(--bg-dark) 100%);
+    }
+
+    .ruleta-logo-badge {
+      position: absolute;
+      bottom: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
+      padding: 6px 18px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ruleta-logo-img {
+      height: 28px;
+      width: auto;
+    }
+
+    .ruleta-body {
+      padding: 24px 20px 30px;
+      text-align: center;
+    }
+
+    .ruleta-title {
+      font-size: 1.6rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      background: linear-gradient(135deg, #ffffff 0%, var(--neon-gold) 60%, var(--neon-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 4px;
+    }
+
+    .ruleta-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      margin-bottom: 18px;
+    }
+
+    .btn-bases {
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      color: var(--neon-gold);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      margin-bottom: 24px;
+    }
+
+    .btn-bases:hover {
+      background: rgba(255, 215, 0, 0.25);
+      transform: translateY(-2px);
+      box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+    }
+
+    /* --- Ruleta Canvas Box --- */
+    .wheel-wrapper {
+      position: relative;
+      width: 320px;
+      height: 320px;
+      margin: 0 auto 24px;
+    }
+
+    .wheel-pointer {
+      position: absolute;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 38px;
+      height: 48px;
+      z-index: 10;
+      filter: drop-shadow(0 4px 10px rgba(0,0,0,0.8));
+    }
+
+    .wheel-pointer polygon {
+      fill: #ff2a6d;
+      stroke: #ffffff;
+      stroke-width: 2;
+    }
+
+    #wheelCanvas {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      box-shadow: 0 0 35px rgba(0, 242, 254, 0.3), inset 0 0 20px rgba(0,0,0,0.8);
+      border: 6px solid rgba(15, 23, 42, 0.9);
+      transition: transform 5s cubic-bezier(0.15, 0.9, 0.2, 1);
+    }
+
+    .wheel-center-cap {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 65px;
+      height: 65px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #1e293b 0%, #0f172a 100%);
+      border: 3px solid var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--neon-cyan);
+      font-size: 1.4rem;
+      pointer-events: none;
+      z-index: 5;
+    }
+
+    /* --- Botón Girar --- */
+    .btn-spin {
+      width: 100%;
+      padding: 16px;
+      background: linear-gradient(135deg, #ffd700 0%, #ff8c00 100%);
+      border: none;
+      border-radius: var(--radius-md);
+      color: #090d16;
+      font-family: inherit;
+      font-size: 1.1rem;
+      font-weight: 900;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 0 25px rgba(255, 215, 0, 0.5);
+      transition: var(--transition);
+      margin-bottom: 22px;
+    }
+
+    .btn-spin:hover:not(:disabled) {
+      transform: translateY(-3px) scale(1.02);
+      box-shadow: 0 0 40px rgba(255, 215, 0, 0.8);
+    }
+
+    .btn-spin:disabled {
+      background: #334155;
+      color: #94a3b8;
+      box-shadow: none;
+      cursor: not-allowed;
+    }
+
+    /* --- Formulario de Verificación --- */
+    .form-container {
+      background: rgba(30, 41, 59, 0.5);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      text-align: left;
+      margin-bottom: 22px;
+    }
+
+    .form-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--neon-cyan);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-label span.req { color: var(--neon-cyan); }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-glass);
+      border-radius: 10px;
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+    }
+
+    /* Redes & Comunidad Box */
+    .social-verify-box {
+      background: rgba(37, 211, 102, 0.08);
+      border: 1px solid rgba(37, 211, 102, 0.3);
+      border-radius: 12px;
+      padding: 14px;
+      margin-bottom: 16px;
+    }
+
+    .social-verify-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--whatsapp-green);
+      margin-bottom: 10px;
+    }
+
+    .social-verify-links {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px;
+      border-radius: 8px;
+      color: white;
+      text-decoration: none;
+      font-size: 0.78rem;
+      font-weight: 700;
+      transition: var(--transition);
+    }
+
+    .social-btn--ws { background: #25d366; }
+    .social-btn--ig { background: #e1306c; }
+    .social-btn--tk { background: #000000; border: 1px solid rgba(255,255,255,0.2); }
+    .social-btn--yt { background: #ff0000; }
+
+    .social-btn:hover {
+      transform: translateY(-2px);
+      opacity: 0.9;
+    }
+
+    .btn-register-form {
+      width: 100%;
+      padding: 13px;
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      border: none;
+      border-radius: 10px;
+      color: #090d16;
+      font-weight: 800;
+      font-size: 0.9rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: var(--transition);
+    }
+
+    .btn-register-form:hover {
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.5);
+    }
+
+    /* --- Modales --- */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      z-index: 9999;
+      opacity: 0;
+      visibility: hidden;
+      transition: var(--transition);
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-card {
+      background: #0f172a;
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      max-width: 520px;
+      width: 100%;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 26px;
+      position: relative;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.8);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: rgba(255,255,255,0.1);
+      border: none;
+      color: #fff;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.1rem;
+    }
+
+    /* Winner Content */
+    .winner-box {
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .winner-icon {
+      font-size: 4rem;
+      margin-bottom: 12px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .winner-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--neon-gold);
+      margin-bottom: 10px;
+    }
+
+    .winner-prize-name {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: #ffffff;
+      background: rgba(0, 242, 254, 0.1);
+      border: 1px solid var(--neon-cyan);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+
+    .winner-code {
+      font-family: monospace;
+      font-size: 1.2rem;
+      font-weight: bold;
+      background: #1e293b;
+      color: var(--neon-cyan);
+      padding: 8px 16px;
+      border-radius: 8px;
+      display: inline-block;
+      margin-bottom: 16px;
+      border: 1px dashed var(--neon-cyan);
+    }
+
+    .winner-desc {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.5;
+      margin-bottom: 20px;
+      text-align: left;
+      background: rgba(255,255,255,0.04);
+      padding: 14px;
+      border-radius: 10px;
+    }
+
+    .btn-claim-ws {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      border-radius: var(--radius-md);
+      color: white;
+      text-decoration: none;
+      font-weight: 800;
+      font-size: 0.95rem;
+      box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    /* Bases Content */
+    .bases-content h3 {
+      color: var(--neon-gold);
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+    }
+
+    .bases-content h4 {
+      color: var(--neon-cyan);
+      margin: 14px 0 6px;
+      font-size: 0.95rem;
+    }
+
+    .bases-content p, .bases-content li {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+      margin-bottom: 8px;
+    }
+
+    .bases-content ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+
+    .footer-text {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 20px;
+    }
+
+    .footer-text a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="ruleta-card">
+      <div class="ruleta-header">
+        <img src="assets/fondogestio.jpeg" alt="Gestio Banner" class="ruleta-header__img">
+        <div class="ruleta-header__overlay"></div>
+        <div class="ruleta-logo-badge">
+          <img src="assets/logogestio.jpeg" alt="Gestio Logo" class="ruleta-logo-img">
+        </div>
+      </div>
+
+      <div class="ruleta-body">
+        <h1 class="ruleta-title">🎯 Gira la Ruleta Gestio y Gana</h1>
+        <p class="ruleta-subtitle">Transformación digital y premios exclusivos para tu empresa</p>
+
+        <button class="btn-bases" id="btnOpenBases">
+          <i class="fa-solid fa-file-contract"></i> Ver Bases del Concurso
+        </button>
+
+        <!-- Ruleta Canvas -->
+        <div class="wheel-wrapper">
+          <svg class="wheel-pointer" viewBox="0 0 38 48">
+            <polygon points="19,48 0,0 38,0" />
+          </svg>
+          <canvas id="wheelCanvas" width="500" height="500"></canvas>
+          <div class="wheel-center-cap">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+        </div>
+
+        <!-- Botón Girar -->
+        <button class="btn-spin" id="btnSpin" disabled>
+          <i class="fa-solid fa-lock me-1"></i> Completa tus datos para Girar
+        </button>
+
+        <!-- Formulario Obligatorio para Habilitar Ruleta -->
+        <div class="form-container" id="formWrapper">
+          <div class="form-title">
+            <i class="fa-solid fa-user-check"></i> Paso 1: Ingresa tus datos para habilitar el tiro
+          </div>
+
+          <!-- Verificación de Redes y Comunidad -->
+          <div class="social-verify-box">
+            <div class="social-verify-title">
+              <i class="fa-solid fa-circle-check"></i> Paso previo: Únete e ingresa a nuestras redes
+            </div>
+            <div class="social-verify-links">
+              <a href="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYI" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--ws">
+                <i class="fa-brands fa-whatsapp"></i> Comunidad WS
+              </a>
+              <a href="https://www.instagram.com/somos_gestio/?__pwa=1#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--ig">
+                <i class="fa-brands fa-instagram"></i> Instagram
+              </a>
+              <a href="https://www.tiktok.com/@somos_gestio" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--tk">
+                <i class="fa-brands fa-tiktok"></i> TikTok
+              </a>
+              <a href="https://www.youtube.com/@Somos_Gestiopro" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--yt">
+                <i class="fa-brands fa-youtube"></i> YouTube
+              </a>
+            </div>
+          </div>
+
+          <form id="ruletaForm">
+            <div class="form-group">
+              <label for="regName" class="form-label">Nombre <span class="req">*</span></label>
+              <input type="text" id="regName" class="form-input" placeholder="Tu nombre y apellido" required>
+            </div>
+
+            <div class="form-group">
+              <label for="regCompany" class="form-label">Empresa o Nombre de Proyecto <span class="req">*</span></label>
+              <input type="text" id="regCompany" class="form-input" placeholder="Nombre de tu empresa o idea" required>
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail" class="form-label">Email <span class="req">*</span></label>
+              <input type="email" id="regEmail" class="form-input" placeholder="ejemplo@correo.com" required>
+            </div>
+
+            <div class="form-group">
+              <label for="regPhone" class="form-label">Fono (+56) <span class="req">*</span></label>
+              <input type="tel" id="regPhone" class="form-input" placeholder="+56 9 1234 5678" required>
+            </div>
+
+            <button type="submit" class="btn-register-form" id="btnRegister">
+              <i class="fa-solid fa-unlock"></i> Registrar y Desbloquear Ruleta
+            </button>
+          </form>
+        </div>
+
+        <div class="footer-text">
+          Concurso válido del 6 al 31 de agosto 2026 — <a href="https://gestio.pro" target="_blank">Gestio.pro</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Ganador -->
+  <div class="modal-overlay" id="winnerModal">
+    <div class="modal-card">
+      <button class="modal-close" id="winnerClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="winner-box">
+        <div class="winner-icon" id="wIcon">🏆</div>
+        <div class="winner-title">¡FELICITACIONES! HAS GANADO</div>
+        <div class="winner-prize-name" id="wPrizeName">Cargando Premio...</div>
+        <div class="winner-code" id="wCode">CÓDIGO: GESTIO-0000</div>
+        
+        <div class="winner-desc" id="wDesc">
+          El premio y su código de confirmación han sido registrados a tu correo electrónico. Un ejecutivo de Gestio verificará tus datos para hacer efectivo el beneficio.
+        </div>
+
+        <a href="#" target="_blank" rel="noopener noreferrer" class="btn-claim-ws" id="wClaimWs">
+          <i class="fa-brands fa-whatsapp"></i> Reclamar Premio por WhatsApp
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Bases del Concurso -->
+  <div class="modal-overlay" id="basesModal">
+    <div class="modal-card">
+      <button class="modal-close" id="basesClose"><i class="fa-solid fa-xmark"></i></button>
+      <div class="bases-content">
+        <h3>📜 BASES DEL CONCURSO — GESTIONA CON GESTIO</h3>
+        <p><strong>"Gira la Ruleta Gestio y Gana"</strong></p>
+        
+        <h4>1. Organizador</h4>
+        <p>El presente concurso es organizado por <strong>GESTIO</strong>, empresa especializada en desarrollo de software, automatización de procesos, inteligencia de negocios y transformación digital para empresas.</p>
+
+        <h4>2. Objetivo</h4>
+        <p>El objetivo del concurso es dar a conocer las soluciones tecnológicas de Gestio y premiar a los participantes mediante una ruleta virtual con beneficios exclusivos.</p>
+
+        <h4>3. Vigencia</h4>
+        <p>El concurso será válido para contrataciones de soluciones desde el <strong>6 de agosto 2026 al 31 de agosto 2026</strong>.</p>
+
+        <h4>4. ¿Quiénes pueden participar?</h4>
+        <p>Podrán participar personas naturales mayores de 18 años y empresas que llenen el formulario virtual del concurso, debiendo ingresar sus datos y seguir en redes sociales. Para validar el premio, un ejecutivo de Gestio verificará dichos datos.</p>
+
+        <h4>5. Mecánica del Concurso</h4>
+        <p>Cada participante tendrá derecho a <strong>un solo giro</strong> de la ruleta virtual. El premio obtenido será asignado automáticamente y no podrá ser cambiado por otro premio. El premio y su código serán enviados al correo electrónico registrado.</p>
+
+        <h4>6. Premios Disponibles</h4>
+        <ul>
+          <li>🥇 <strong>1. Desarrollo de Página Web Gratis:</strong> No incluye Dominio (a contar de $9.990 en nic.cl) ni Hosting (en AWS desde $120.000 anual).</li>
+          <li>🥈 <strong>2. Desarrollo de Página Web con 50% de Descuento:</strong> Aplicado sobre valor lista e-commerce. Incluye hosting por 1 año. No incluye dominio.</li>
+          <li>🥉 <strong>3. Desarrollo de Página Web con 30% de Descuento:</strong> Aplicado sobre valor lista e-commerce. Incluye hosting por 1 año. No incluye dominio.</li>
+          <li>🎯 <strong>4. Asesoría Gratuita para Postulación CORFO</strong></li>
+          <li>🎯 <strong>5. Asesoría Gratuita para Postulación SERCOTEC</strong></li>
+          <li>🏆 <strong>6. Postulación Gratuita a CORFO y SERCOTEC</strong></li>
+        </ul>
+
+        <h4>Parámetros de Asesorías (Premios 4, 5 y 6):</h4>
+        <ul>
+          <li>Elaboración del proyecto.</li>
+          <li>Formulación.</li>
+          <li>Revisión documental.</li>
+          <li>Envío de la postulación.</li>
+        </ul>
+        <p style="font-size: 0.78rem; color: #94a3b8;">* Válido para una sola postulación. El participante debe cumplir requisitos de la institución. Gestio no garantiza la adjudicación del fondo.</p>
+
+        <h4>Protección de Datos</h4>
+        <p>Los datos entregados por los participantes serán utilizados únicamente para fines relacionados con el concurso e informar sobre los servicios de Gestio. No serán comercializados ni compartidos con terceros.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Definición de Premios ───
+    const prizes = [
+      { text: "Página Web GRATIS", icon: "🥇", color: "#10b981", fullText: "Desarrollo de Página Web Gratis", desc: "No incluye dominio (nic.cl) ni hosting AWS. Aplican bases del concurso." },
+      { text: "Página Web 50% OFF", icon: "🥈", color: "#00f2fe", fullText: "Desarrollo de Página Web con 50% de Descuento", desc: "Aplicado sobre valor lista e-commerce. Incluye hosting por 1 año. No incluye dominio." },
+      { text: "Página Web 30% OFF", icon: "🥉", color: "#818cf8", fullText: "Desarrollo de Página Web con 30% de Descuento", desc: "Aplicado sobre valor lista e-commerce. Incluye hosting por 1 año. No incluye dominio." },
+      { text: "Asesoría CORFO", icon: "🎯", color: "#f59e0b", fullText: "Asesoría Gratuita para Postulación CORFO", desc: "Incluye elaboración, formulación, revisión documental y envío de postulación." },
+      { text: "Asesoría SERCOTEC", icon: "🎯", color: "#ec4899", fullText: "Asesoría Gratuita para Postulación SERCOTEC", desc: "Incluye elaboración, formulación, revisión documental y envío de postulación." },
+      { text: "Postulación CORFO + SERCOTEC", icon: "🏆", color: "#ffd700", fullText: "Postulación Gratuita a CORFO y SERCOTEC", desc: "Revisión documental y formulación completa para ambas instituciones." }
+    ];
+
+    let currentAngle = 0;
+    let isSpinning = false;
+    let registeredLead = null;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      drawWheel();
+      bindEvents();
+    });
+
+    // ─── Dibujar Ruleta Canvas ───
+    function drawWheel() {
+      const canvas = document.getElementById('wheelCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const numSegments = prizes.length;
+      const arcSize = (2 * Math.PI) / numSegments;
+      const centerX = canvas.width / 2;
+      const centerY = canvas.height / 2;
+      const radius = canvas.width / 2 - 8;
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      for (let i = 0; i < numSegments; i++) {
+        const angle = i * arcSize;
+        ctx.beginPath();
+        ctx.fillStyle = prizes[i].color;
+        ctx.moveTo(centerX, centerY);
+        ctx.arc(centerX, centerY, radius, angle, angle + arcSize);
+        ctx.lineTo(centerX, centerY);
+        ctx.fill();
+
+        // Borde elegante
+        ctx.strokeStyle = 'rgba(15, 23, 42, 0.5)';
+        ctx.lineWidth = 3;
+        ctx.stroke();
+
+        // Texto e ícono
+        ctx.save();
+        ctx.translate(centerX, centerY);
+        ctx.rotate(angle + arcSize / 2);
+        ctx.textAlign = "right";
+        ctx.fillStyle = "#090d16";
+        ctx.font = "bold 18px Outfit, sans-serif";
+        ctx.fillText(`${prizes[i].icon} ${prizes[i].text}`, radius - 20, 6);
+        ctx.restore();
+      }
+    }
+
+    // ─── Bind Events ───
+    function bindEvents() {
+      // Modales
+      document.getElementById('btnOpenBases')?.addEventListener('click', () => {
+        document.getElementById('basesModal').classList.add('show');
+      });
+      document.getElementById('basesClose')?.addEventListener('click', () => {
+        document.getElementById('basesModal').classList.remove('show');
+      });
+      document.getElementById('winnerClose')?.addEventListener('click', () => {
+        document.getElementById('winnerModal').classList.remove('show');
+      });
+
+      // Formulario de Registro
+      document.getElementById('ruletaForm')?.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById('regName')?.value.trim();
+        const company = document.getElementById('regCompany')?.value.trim();
+        const email = document.getElementById('regEmail')?.value.trim();
+        const phone = document.getElementById('regPhone')?.value.trim();
+
+        if (!name || !company || !email || !phone) {
+          alert('Por favor completa todos los campos obligatorios');
+          return;
+        }
+
+        registeredLead = { name, company, email, phone };
+
+        // Ocultar formulario o marcar como listo
+        const formWrap = document.getElementById('formWrapper');
+        if (formWrap) {
+          formWrap.style.opacity = '0.6';
+          formWrap.style.pointerEvents = 'none';
+        }
+
+        // Habilitar botón de girar
+        const btnSpin = document.getElementById('btnSpin');
+        if (btnSpin) {
+          btnSpin.disabled = false;
+          btnSpin.innerHTML = '<i class="fa-solid fa-play me-1"></i> 🎰 ¡GIRAR RULETA AHORA!';
+          btnSpin.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+      });
+
+      // Botón Girar
+      document.getElementById('btnSpin')?.addEventListener('click', spinWheel);
+    }
+
+    // ─── Lógica de Giro ───
+    function spinWheel() {
+      if (isSpinning || !registeredLead) return;
+      isSpinning = true;
+
+      const btnSpin = document.getElementById('btnSpin');
+      btnSpin.disabled = true;
+      btnSpin.innerHTML = '<i class="fa-solid fa-spinner fa-spin me-1"></i> Girando... Suerte!';
+
+      const numSegments = prizes.length;
+      const winningIndex = Math.floor(Math.random() * numSegments);
+
+      // Calcular ángulo de parada exacto
+      // Apuntador arriba (270deg = -PI/2)
+      const segmentAngle = 360 / numSegments;
+      const targetSegmentCenter = winningIndex * segmentAngle + (segmentAngle / 2);
+      const rotations = 5 * 360; // 5 giros completos
+      
+      // La rueda gira en sentido horario; el puntero está en top (270 grados en canvas standard)
+      const finalAngle = rotations + (270 - targetSegmentCenter);
+
+      const canvas = document.getElementById('wheelCanvas');
+      canvas.style.transform = `rotate(${finalAngle}deg)`;
+
+      // Al terminar la animación (5 segundos)
+      setTimeout(() => {
+        isSpinning = false;
+        handleWin(prizes[winningIndex]);
+      }, 5000);
+    }
+
+    // ─── Manejo de Ganador ───
+    async function handleWin(prize) {
+      // Generar Código Único de Canje
+      const code = 'GESTIO-' + Math.random().toString(36).substring(2, 7).toUpperCase();
+
+      // Confeti
+      try {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      } catch (err) {}
+
+      // Llenar Modal Ganador
+      document.getElementById('wIcon').textContent = prize.icon;
+      document.getElementById('wPrizeName').textContent = prize.fullText;
+      document.getElementById('wCode').textContent = `CÓDIGO DE CANJE: ${code}`;
+      document.getElementById('wDesc').innerHTML = `
+        <strong>Detalles del Premio:</strong> ${prize.desc}<br><br>
+        <strong>Registrado a nombre de:</strong> ${registeredLead.name} (${registeredLead.company})<br>
+        <strong>Email:</strong> ${registeredLead.email} | <strong>Fono:</strong> ${registeredLead.phone}
+      `;
+
+      // Configurar botón de WhatsApp
+      const wsText = encodeURIComponent(`¡Hola Gestio! Acabo de girar la ruleta y gané: ${prize.fullText}. Mi Código es ${code}. Mi empresa es ${registeredLead.company}`);
+      document.getElementById('wClaimWs').href = `https://wa.me/56928786139?text=${wsText}`;
+
+      // Mostrar Modal
+      document.getElementById('winnerModal').classList.add('show');
+
+      // Registrar Lead y Premio en el CRM
+      try {
+        const params = new URLSearchParams();
+        params.append('nombre', registeredLead.name);
+        params.append('empresa', registeredLead.company);
+        params.append('email', registeredLead.email);
+        params.append('telefono', registeredLead.phone);
+        params.append('origen', 'Ruleta Gestio');
+        params.append('premio', prize.fullText);
+        params.append('codigo_premio', code);
+
+        await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+          },
+          body: params.toString()
+        });
+      } catch (err) {
+        console.error('Error registrando lead en CRM:', err);
+      }
+    }
+  </script>
+</body>
+</html>
