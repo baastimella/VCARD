@@ -74,7 +74,7 @@
     /* Header Banner */
     .ruleta-header {
       position: relative;
-      height: 150px;
+      height: 180px;
       overflow: hidden;
       text-align: center;
     }
@@ -94,22 +94,23 @@
 
     .ruleta-logo-badge {
       position: absolute;
-      bottom: 12px;
+      bottom: 14px;
       left: 50%;
       transform: translateX(-50%);
       background: rgba(15, 23, 42, 0.95);
-      border: 1px solid var(--neon-cyan);
-      box-shadow: 0 0 25px rgba(0, 242, 254, 0.5);
-      padding: 6px 18px;
+      border: 2px solid var(--neon-cyan);
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.6);
+      padding: 10px 24px;
       border-radius: 50px;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
     }
 
     .ruleta-logo-img {
-      height: 28px;
+      height: 48px;
       width: auto;
+      display: block;
     }
 
     .ruleta-body {
@@ -549,32 +550,16 @@
           <i class="fa-solid fa-file-contract"></i> Ver Bases del Concurso
         </button>
 
-        <!-- Ruleta Canvas -->
-        <div class="wheel-wrapper">
-          <svg class="wheel-pointer" viewBox="0 0 38 48">
-            <polygon points="19,48 0,0 38,0" />
-          </svg>
-          <canvas id="wheelCanvas" width="500" height="500"></canvas>
-          <div class="wheel-center-cap">
-            <i class="fa-solid fa-gift"></i>
-          </div>
-        </div>
-
-        <!-- Botón Girar -->
-        <button class="btn-spin" id="btnSpin" disabled>
-          <i class="fa-solid fa-lock me-1"></i> Completa tus datos para Girar
-        </button>
-
-        <!-- Formulario Obligatorio para Habilitar Ruleta -->
+        <!-- Paso 1: Formulario Obligatorio para Habilitar Ruleta -->
         <div class="form-container" id="formWrapper">
           <div class="form-title">
-            <i class="fa-solid fa-user-check"></i> Paso 1: Ingresa tus datos para habilitar el tiro
+            <i class="fa-solid fa-user-check"></i> Paso 1: Ingresa tus datos para habilitar la Ruleta
           </div>
 
           <!-- Verificación de Redes y Comunidad -->
           <div class="social-verify-box">
             <div class="social-verify-title">
-              <i class="fa-solid fa-circle-check"></i> Paso previo: Únete e ingresa a nuestras redes
+              <i class="fa-solid fa-circle-check"></i> Requisito: Únete a la comunidad y síguenos en redes
             </div>
             <div class="social-verify-links">
               <a href="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYI" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--ws">
@@ -617,6 +602,32 @@
               <i class="fa-solid fa-unlock"></i> Registrar y Desbloquear Ruleta
             </button>
           </form>
+        </div>
+
+        <!-- Paso 2: Ruleta Canvas & Botón Girar -->
+        <div id="stepSpinArea" style="opacity: 0.5; pointer-events: none; transition: all 0.4s ease;">
+          <div class="form-title" style="justify-content: center; font-size: 1.1rem; margin-bottom: 18px;">
+            <i class="fa-solid fa-dharmachakra"></i> Paso 2: ¡Gira la Ruleta y Gana tu Premio!
+          </div>
+
+          <div class="wheel-wrapper">
+            <svg class="wheel-pointer" viewBox="0 0 38 48">
+              <polygon points="19,48 0,0 38,0" />
+            </svg>
+            <canvas id="wheelCanvas" width="500" height="500"></canvas>
+            <div class="wheel-center-cap">
+              <i class="fa-solid fa-gift"></i>
+            </div>
+          </div>
+
+          <!-- Botón Girar -->
+          <button class="btn-spin" id="btnSpin" disabled>
+            <i class="fa-solid fa-lock me-1"></i> Registra tus datos arriba para Girar
+          </button>
+        </div>
+
+        <div class="footer-text">
+          Concurso válido del 6 al 31 de agosto 2026 — <a href="https://gestio.pro" target="_blank">Gestio.pro</a>
         </div>
 
         <div class="footer-text">
@@ -783,11 +794,18 @@
 
         registeredLead = { name, company, email, phone };
 
-        // Ocultar formulario o marcar como listo
+        // Ocultar/bloquear formulario tras completar registro
         const formWrap = document.getElementById('formWrapper');
         if (formWrap) {
-          formWrap.style.opacity = '0.6';
+          formWrap.style.opacity = '0.7';
           formWrap.style.pointerEvents = 'none';
+        }
+
+        // Habilitar área de Ruleta (Paso 2)
+        const stepSpinArea = document.getElementById('stepSpinArea');
+        if (stepSpinArea) {
+          stepSpinArea.style.opacity = '1';
+          stepSpinArea.style.pointerEvents = 'auto';
         }
 
         // Habilitar botón de girar
@@ -795,7 +813,7 @@
         if (btnSpin) {
           btnSpin.disabled = false;
           btnSpin.innerHTML = '<i class="fa-solid fa-play me-1"></i> 🎰 ¡GIRAR RULETA AHORA!';
-          btnSpin.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          stepSpinArea.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
       });
 
