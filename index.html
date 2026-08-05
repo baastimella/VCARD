@@ -50,7 +50,7 @@
 
     <!-- Banner -->
     <header class="vcard__banner">
-      <img id="bannerImg" class="vcard__banner-img" src="assets/fondo.jpeg" alt="Banner" loading="eager">
+      <img id="bannerImg" class="vcard__banner-img" src="assets/fondogestio.jpeg" alt="Banner" loading="eager">
     </header>
 
     <!-- Avatar -->
@@ -76,7 +76,9 @@
     <section class="vcard__info">
       <h1 class="vcard__name" id="profileName" itemprop="name">Rolando Silva</h1>
       <p class="vcard__title" id="profileTitle" itemprop="jobTitle">CEO Fundador</p>
-      <p class="vcard__company" id="profileCompany" itemprop="worksFor">Gestio</p>
+      <div class="vcard__company-logo-wrapper">
+        <img src="assets/logogestio.jpeg" alt="Gestio" class="vcard__company-logo">
+      </div>
       <p class="vcard__bio" id="profileBio">Entregamos soluciones a Pymes y Empresas para que puedan impulsar la
         transformación digital mediante tecnologia inteligente, automatización y analisis de datos, permitiendo a
         nuestros clientes controlar su negocio, optimizar sus procesos y tener información eficaz y oportuna.</p>
@@ -118,8 +120,19 @@
 
     <div class="vcard__divider"></div>
 
-    <!-- Contact Details -->
-    <section class="vcard__details" aria-label="Datos de contacto">
+    <!-- Contact Details & Lead Capture -->
+    <section class="vcard__details" aria-label="Contacto y Asistencia">
+      <button class="vcard__detail vcard__detail--lead" id="btnOpenLeadModal">
+        <div class="vcard__detail-icon vcard__detail-icon--highlight">
+          <i class="fa-solid fa-paper-plane"></i>
+        </div>
+        <div class="vcard__detail-content">
+          <div class="vcard__detail-label">Contacto Directo</div>
+          <div class="vcard__detail-value">Déjanos tus datos y te contactamos</div>
+        </div>
+        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
+      </button>
+
       <button class="vcard__detail" id="detailCalendarRow">
         <div class="vcard__detail-icon">
           <i class="fa-solid fa-calendar-check"></i>
@@ -127,61 +140,6 @@
         <div class="vcard__detail-content">
           <div class="vcard__detail-label">Reunión</div>
           <div class="vcard__detail-value" id="detailCalendar">Agendar Cita en Google Calendar</div>
-        </div>
-        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
-      </button>
-
-      <button class="vcard__detail" id="detailPhoneRow">
-        <div class="vcard__detail-icon">
-          <i class="fa-solid fa-phone"></i>
-        </div>
-        <div class="vcard__detail-content">
-          <div class="vcard__detail-label">Teléfono</div>
-          <div class="vcard__detail-value" id="detailPhone" itemprop="telephone">+56 9 2878 6139</div>
-        </div>
-        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
-      </button>
-
-      <button class="vcard__detail" id="detailEmailRow">
-        <div class="vcard__detail-icon">
-          <i class="fa-solid fa-envelope"></i>
-        </div>
-        <div class="vcard__detail-content">
-          <div class="vcard__detail-label">Email</div>
-          <div class="vcard__detail-value" id="detailEmail" itemprop="email">rsilva@gestio.pro</div>
-        </div>
-        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
-      </button>
-
-      <button class="vcard__detail" id="detailCompanyRow">
-        <div class="vcard__detail-icon">
-          <i class="fa-solid fa-building"></i>
-        </div>
-        <div class="vcard__detail-content">
-          <div class="vcard__detail-label">Empresa</div>
-          <div class="vcard__detail-value" id="detailCompany">Gestio</div>
-        </div>
-        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
-      </button>
-
-      <button class="vcard__detail" id="detailAddressRow">
-        <div class="vcard__detail-icon">
-          <i class="fa-solid fa-location-dot"></i>
-        </div>
-        <div class="vcard__detail-content">
-          <div class="vcard__detail-label">Ubicación</div>
-          <div class="vcard__detail-value" id="detailAddress" itemprop="address">Antonio Varas 854, Temuco, Chile</div>
-        </div>
-        <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
-      </button>
-
-      <button class="vcard__detail" id="detailWebsiteRow">
-        <div class="vcard__detail-icon">
-          <i class="fa-solid fa-globe"></i>
-        </div>
-        <div class="vcard__detail-content">
-          <div class="vcard__detail-label">Sitio Web</div>
-          <div class="vcard__detail-value" id="detailWebsite" itemprop="url">www.gestio.pro</div>
         </div>
         <i class="fa-solid fa-chevron-right vcard__detail-arrow"></i>
       </button>
@@ -205,24 +163,16 @@
     <section class="vcard__socials" aria-label="Redes sociales">
       <h2 class="vcard__socials-title">Redes Sociales</h2>
       <div class="vcard__socials-grid">
-        <a class="vcard__social-link vcard__social-link--instagram" id="socialInstagram" href="#" target="_blank"
+        <a class="vcard__social-link vcard__social-link--instagram" id="socialInstagram" href="https://www.instagram.com/somos_gestio/?__pwa=1#" target="_blank"
           rel="noopener noreferrer" title="Instagram">
           <i class="fa-brands fa-instagram"></i>
         </a>
-        <a class="vcard__social-link vcard__social-link--facebook" id="socialFacebook" href="#" target="_blank"
-          rel="noopener noreferrer" title="Facebook">
-          <i class="fa-brands fa-facebook-f"></i>
-        </a>
-        <a class="vcard__social-link vcard__social-link--twitter" id="socialTwitter" href="#" target="_blank"
-          rel="noopener noreferrer" title="X (Twitter)">
-          <i class="fa-brands fa-x-twitter"></i>
-        </a>
-        <a class="vcard__social-link vcard__social-link--tiktok" id="socialTiktok" href="#" target="_blank"
-          rel="noopener noreferrer" title="TikTok" style="display:none;">
+        <a class="vcard__social-link vcard__social-link--tiktok" id="socialTiktok" href="https://www.tiktok.com/@somos_gestio" target="_blank"
+          rel="noopener noreferrer" title="TikTok">
           <i class="fa-brands fa-tiktok"></i>
         </a>
-        <a class="vcard__social-link vcard__social-link--youtube" id="socialYoutube" href="#" target="_blank"
-          rel="noopener noreferrer" title="YouTube" style="display:none;">
+        <a class="vcard__social-link vcard__social-link--youtube" id="socialYoutube" href="https://www.youtube.com/@Somos_Gestiopro" target="_blank"
+          rel="noopener noreferrer" title="YouTube">
           <i class="fa-brands fa-youtube"></i>
         </a>
       </div>
@@ -273,6 +223,48 @@
           <span>Más opciones...</span>
         </button>
       </div>
+    </div>
+  </div>
+
+  <!-- ─── Lead Form Modal ("Déjanos tus datos y te contactamos") ─── -->
+  <div class="vcard-modal-overlay" id="leadModalOverlay" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
+    <div class="vcard-modal vcard-modal--form">
+      <div class="vcard-modal__header">
+        <div>
+          <h3 class="vcard-modal__title" id="leadModalTitle">Déjanos tus datos</h3>
+          <p class="vcard-modal__subtitle">Te contactaremos a la brevedad</p>
+        </div>
+        <button class="vcard-modal__close" id="leadModalClose" aria-label="Cerrar">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <form id="leadForm" class="vcard-form">
+        <div class="vcard-form__group">
+          <label for="leadName" class="vcard-form__label">Nombre completo <span class="required">*</span></label>
+          <input type="text" id="leadName" class="vcard-form__input" placeholder="Ej: Juan Pérez" required>
+        </div>
+
+        <div class="vcard-form__group">
+          <label for="leadEmail" class="vcard-form__label">Email <span class="required">*</span></label>
+          <input type="email" id="leadEmail" class="vcard-form__input" placeholder="ejemplo@correo.com" required>
+        </div>
+
+        <div class="vcard-form__group">
+          <label for="leadPhone" class="vcard-form__label">Fono (+56) <span class="required">*</span></label>
+          <input type="tel" id="leadPhone" class="vcard-form__input" placeholder="+56 9 1234 5678" required>
+        </div>
+
+        <div class="vcard-form__group">
+          <label for="leadNote" class="vcard-form__label">Nota <span class="optional">(Opcional)</span></label>
+          <textarea id="leadNote" class="vcard-form__textarea" rows="3" placeholder="Mensaje o consulta..."></textarea>
+        </div>
+
+        <button type="submit" class="vcard-form__submit-btn" id="btnSubmitLead">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Enviar Datos</span>
+        </button>
+      </form>
     </div>
   </div>
 

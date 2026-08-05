@@ -864,6 +864,149 @@ body::before {
 
 .vcard-modal__option--whatsapp i { color: #25d366; }
 
+/* --- Company Logo Badge --- */
+.vcard__company-logo-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid var(--border-neon);
+  border-radius: var(--radius-full);
+  padding: 6px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.25);
+  transition: var(--transition-base);
+}
+
+.vcard__company-logo-wrapper:hover {
+  border-color: rgba(56, 189, 248, 0.6);
+  box-shadow: var(--glow-cyan);
+}
+
+.vcard__company-logo {
+  height: 26px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+}
+
+/* --- Lead Highlight Row --- */
+.vcard__detail--lead {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.14) 0%, rgba(129, 140, 248, 0.14) 100%) !important;
+  border-color: rgba(0, 242, 254, 0.4) !important;
+  box-shadow: 0 4px 15px rgba(0, 242, 254, 0.18) !important;
+}
+
+.vcard__detail--lead:hover {
+  background: linear-gradient(135deg, rgba(0, 242, 254, 0.24) 0%, rgba(129, 140, 248, 0.24) 100%) !important;
+  border-color: rgba(0, 242, 254, 0.8) !important;
+  box-shadow: var(--glow-cyan) !important;
+}
+
+.vcard__detail-icon--highlight {
+  background: var(--gradient-glow) !important;
+  color: #0f172a !important;
+  box-shadow: 0 0 15px rgba(0, 242, 254, 0.5) !important;
+}
+
+/* --- Lead Modal Form --- */
+.vcard-modal--form {
+  max-width: 440px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.vcard-modal__subtitle {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+.vcard-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.vcard-form__group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  text-align: left;
+}
+
+.vcard-form__label {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.vcard-form__label .required {
+  color: var(--neon-cyan);
+}
+
+.vcard-form__label .optional {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.vcard-form__input,
+.vcard-form__textarea {
+  width: 100%;
+  padding: 12px 14px;
+  background: rgba(30, 41, 59, 0.7);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.9rem;
+  outline: none;
+  transition: var(--transition-fast);
+}
+
+.vcard-form__input:focus,
+.vcard-form__textarea:focus {
+  border-color: var(--neon-cyan);
+  box-shadow: 0 0 12px rgba(0, 242, 254, 0.3);
+  background: rgba(30, 41, 59, 0.9);
+}
+
+.vcard-form__textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.vcard-form__submit-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 14px;
+  margin-top: 6px;
+  background: var(--gradient-glow);
+  border: none;
+  border-radius: var(--radius-lg);
+  color: #0f172a;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: var(--glow-cyan);
+  transition: var(--transition-base);
+}
+
+.vcard-form__submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 25px rgba(0, 242, 254, 0.6);
+}
+
+.vcard-form__submit-btn:active {
+  transform: translateY(0);
+}
+
 /* Shared Animations */
 @keyframes fadeSlideUp {
   from {

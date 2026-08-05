@@ -27,16 +27,16 @@ const contactData = {
   whatsapp: '56928786139',
   whatsappMessage: '¡Hola Rolando! Vi tu tarjeta de contacto y me gustaría conectar contigo.',
   linkedin: '',
-  instagram: '',
+  instagram: 'https://www.instagram.com/somos_gestio/?__pwa=1#',
   facebook: '',
   twitter: '',
-  tiktok: '',
-  youtube: '',
+  tiktok: 'https://www.tiktok.com/@somos_gestio',
+  youtube: 'https://www.youtube.com/@Somos_Gestiopro',
 
   // Card
   cardUrl: window.location.href,
   avatarUrl: 'assets/fotorolando.png',
-  bannerUrl: 'assets/fondo.jpeg',
+  bannerUrl: 'assets/fondogestio.jpeg',
 };
 
 // ─── Initialize ───
@@ -175,14 +175,79 @@ function bindEvents() {
     if (contactData.website && contactData.website !== 'Ingresar:') window.open(contactData.website, '_blank');
   });
 
-  document.getElementById('detailAddressRow')?.addEventListener('click', () => {
-    if (contactData.addressMap) window.open(contactData.addressMap, '_blank');
+  // Lead Form Modal ("Déjanos tus datos y te contactamos")
+  document.getElementById('btnOpenLeadModal')?.addEventListener('click', openLeadModal);
+  document.getElementById('leadModalClose')?.addEventListener('click', closeLeadModal);
+  document.getElementById('leadModalOverlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeLeadModal();
   });
+  document.getElementById('leadForm')?.addEventListener('submit', handleLeadSubmit);
 
   // Keyboard: Escape closes modal
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeShareModal();
+    if (e.key === 'Escape') {
+      closeShareModal();
+      closeLeadModal();
+    }
   });
+}
+
+function openLeadModal() {
+  const overlay = document.getElementById('leadModalOverlay');
+  if (overlay) {
+    overlay.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+}
+
+function closeLeadModal() {
+  const overlay = document.getElementById('leadModalOverlay');
+  if (overlay) {
+    overlay.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+}
+
+function handleLeadSubmit(e) {
+  e.preventDefault();
+
+  const name = document.getElementById('leadName')?.value.trim();
+  const email = document.getElementById('leadEmail')?.value.trim();
+  const phone = document.getElementById('leadPhone')?.value.trim();
+  const note = document.getElementById('leadNote')?.value.trim();
+
+  if (!name || !email || !phone) {
+    showToast('Por favor completa los campos obligatorios', 'fa-solid fa-circle-exclamation');
+    return;
+  }
+
+  const newLead = {
+    name,
+    email,
+    phone,
+    note,
+    timestamp: new Date().toISOString()
+  };
+
+  // Save to localStorage
+  try {
+    const leads = JSON.parse(localStorage.getItem('gestio_leads') || '[]');
+    leads.push(newLead);
+    localStorage.setItem('gestio_leads', JSON.stringify(leads));
+  } catch (err) {
+    console.warn('LocalStorage unavailable', err);
+  }
+
+  // Show confirmation alert message
+  showToast('¡Datos registrados exitosamente! Redirigiendo a Gestio...', 'fa-solid fa-circle-check');
+
+  closeLeadModal();
+  e.target.reset();
+
+  // Redirect to Gestio homepage after 2.5 seconds
+  setTimeout(() => {
+    window.location.href = 'https://gestio.pro';
+  }, 2500);
 }
 
 // ─── vCard Generation & Download ───
