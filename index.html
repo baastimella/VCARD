@@ -226,23 +226,37 @@
     </div>
   </div>
 
-  <!-- ─── Lead Form Modal ("Déjanos tus datos y te contactamos") ─── -->
+  <!-- ─── Lead Form Modal ("Código Promocional & Comunidad") ─── -->
   <div class="vcard-modal-overlay" id="leadModalOverlay" role="dialog" aria-modal="true" aria-labelledby="leadModalTitle">
     <div class="vcard-modal vcard-modal--form">
       <div class="vcard-modal__header">
         <div>
-          <h3 class="vcard-modal__title" id="leadModalTitle">Déjanos tus datos</h3>
-          <p class="vcard-modal__subtitle">Te contactaremos a la brevedad</p>
+          <h3 class="vcard-modal__title" id="leadModalTitle">Código Promocional & Descuento</h3>
+          <p class="vcard-modal__subtitle">Obtén beneficios en Gestio integrándote a la comunidad</p>
         </div>
         <button class="vcard-modal__close" id="leadModalClose" aria-label="Cerrar">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
+      <div class="vcard-form__promo-box">
+        <div class="vcard-form__promo-badge"><i class="fa-solid fa-gift"></i> Beneficio Exclusivo</div>
+        <p class="vcard-form__promo-text">Síguenos en redes sociales e ingresa a nuestra comunidad para activar tu descuento:</p>
+        <a href="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYl" target="_blank" rel="noopener noreferrer" class="vcard-form__community-btn">
+          <i class="fa-brands fa-whatsapp"></i>
+          <span>Ingresar a la Comunidad</span>
+        </a>
+      </div>
+
       <form id="leadForm" class="vcard-form">
         <div class="vcard-form__group">
-          <label for="leadName" class="vcard-form__label">Nombre completo <span class="required">*</span></label>
-          <input type="text" id="leadName" class="vcard-form__input" placeholder="Ej: Juan Pérez" required>
+          <label for="leadName" class="vcard-form__label">Nombre <span class="required">*</span></label>
+          <input type="text" id="leadName" class="vcard-form__input" placeholder="Tu nombre" required>
+        </div>
+
+        <div class="vcard-form__group">
+          <label for="leadCompany" class="vcard-form__label">Empresa o Nombre de Proyecto <span class="required">*</span></label>
+          <input type="text" id="leadCompany" class="vcard-form__input" placeholder="Nombre de tu empresa o proyecto" required>
         </div>
 
         <div class="vcard-form__group">
@@ -255,14 +269,9 @@
           <input type="tel" id="leadPhone" class="vcard-form__input" placeholder="+56 9 1234 5678" required>
         </div>
 
-        <div class="vcard-form__group">
-          <label for="leadNote" class="vcard-form__label">Nota <span class="optional">(Opcional)</span></label>
-          <textarea id="leadNote" class="vcard-form__textarea" rows="3" placeholder="Mensaje o consulta..."></textarea>
-        </div>
-
         <button type="submit" class="vcard-form__submit-btn" id="btnSubmitLead">
-          <i class="fa-solid fa-paper-plane"></i>
-          <span>Enviar Datos</span>
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Guardar</span>
         </button>
       </form>
     </div>

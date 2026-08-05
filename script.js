@@ -208,28 +208,29 @@ function closeLeadModal() {
   }
 }
 
-function handleLeadSubmit(e) {
+async function handleLeadSubmit(e) {
   e.preventDefault();
 
   const name = document.getElementById('leadName')?.value.trim();
+  const company = document.getElementById('leadCompany')?.value.trim();
   const email = document.getElementById('leadEmail')?.value.trim();
   const phone = document.getElementById('leadPhone')?.value.trim();
-  const note = document.getElementById('leadNote')?.value.trim();
 
-  if (!name || !email || !phone) {
-    showToast('Por favor completa los campos obligatorios', 'fa-solid fa-circle-exclamation');
+  if (!name || !company || !email || !phone) {
+    showToast('Por favor completa todos los campos obligatorios', 'fa-solid fa-circle-exclamation');
     return;
   }
 
   const newLead = {
     name,
+    company,
     email,
     phone,
-    note,
+    origen: 'Codigo promocional',
     timestamp: new Date().toISOString()
   };
 
-  // Save to localStorage
+  // 1. Save backup to localStorage
   try {
     const leads = JSON.parse(localStorage.getItem('gestio_leads') || '[]');
     leads.push(newLead);
@@ -238,13 +239,32 @@ function handleLeadSubmit(e) {
     console.warn('LocalStorage unavailable', err);
   }
 
-  // Show confirmation alert message
-  showToast('¡Datos registrados exitosamente! Redirigiendo a Gestio...', 'fa-solid fa-circle-check');
+  // 2. Post lead to CRM gestiodemo.gestio.pro API
+  try {
+    fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        nombre: name,
+        empresa: company,
+        email: email,
+        telefono: phone,
+        origen: 'Codigo promocional - Tarjeta Digital'
+      })
+    }).catch(err => console.log('CRM API post:', err));
+  } catch (err) {
+    // Silencioso
+  }
+
+  // 3. Show confirmation message
+  showToast('¡Datos enviados con éxito! Redirigiendo a Gestio...', 'fa-solid fa-circle-check');
 
   closeLeadModal();
   e.target.reset();
 
-  // Redirect to Gestio homepage after 2.5 seconds
+  // 4. Redirect to Gestio homepage after 2.5 seconds
   setTimeout(() => {
     window.location.href = 'https://gestio.pro';
   }, 2500);
