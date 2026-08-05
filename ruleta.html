@@ -894,13 +894,15 @@
         params.append('premio', prize.fullText);
         params.append('codigo_premio', code);
 
-        await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+        const response = await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
           },
           body: params.toString()
         });
+        const dataJson = await response.json();
+        console.log('CRM Ruleta Winner Registered:', dataJson);
       } catch (err) {
         console.error('Error registrando lead en CRM:', err);
       }
