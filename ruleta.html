@@ -324,14 +324,17 @@
     .social-btn {
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       gap: 6px;
-      padding: 10px;
+      padding: 10px 12px;
       border-radius: 8px;
+      border: 2px solid transparent;
       color: white;
       text-decoration: none;
       font-size: 0.78rem;
       font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
       transition: var(--transition);
     }
 
@@ -339,6 +342,11 @@
     .social-btn--ig { background: #e1306c; }
     .social-btn--tk { background: #000000; border: 1px solid rgba(255,255,255,0.2); }
     .social-btn--yt { background: #ff0000; }
+
+    .social-btn.verified {
+      border-color: #ffffff !important;
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.6) !important;
+    }
 
     .social-btn:hover {
       transform: translateY(-2px);
@@ -556,25 +564,32 @@
             <i class="fa-solid fa-user-check"></i> Paso 1: Ingresa tus datos para habilitar la Ruleta
           </div>
 
-          <!-- Verificación de Redes y Comunidad -->
-          <div class="social-verify-box">
-            <div class="social-verify-title">
-              <i class="fa-solid fa-circle-check"></i> Requisito: Únete a la comunidad y síguenos en redes
+          <!-- Verificación de Redes y Comunidad (Obligatorio) -->
+          <div class="social-verify-box" id="socialVerifyBox">
+            <div class="social-verify-title" id="socialVerifyTitle" style="color: #ffd700;">
+              <i class="fa-solid fa-lock"></i> Requisito Obligatorio: Haz clic en las 4 redes para desbloquear (0/4)
             </div>
             <div class="social-verify-links">
-              <a href="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYI" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--ws">
-                <i class="fa-brands fa-whatsapp"></i> Comunidad WS
-              </a>
-              <a href="https://www.instagram.com/somos_gestio/?__pwa=1#" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--ig">
-                <i class="fa-brands fa-instagram"></i> Instagram
-              </a>
-              <a href="https://www.tiktok.com/@somos_gestio" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--tk">
-                <i class="fa-brands fa-tiktok"></i> TikTok
-              </a>
-              <a href="https://www.youtube.com/@Somos_Gestiopro" target="_blank" rel="noopener noreferrer" class="social-btn social-btn--yt">
-                <i class="fa-brands fa-youtube"></i> YouTube
-              </a>
+              <button type="button" class="social-btn social-btn--ws" data-id="ws" data-url="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYI">
+                <span><i class="fa-brands fa-whatsapp me-1"></i> Comunidad WS</span>
+                <i class="fa-solid fa-circle-notch status-icon"></i>
+              </button>
+              <button type="button" class="social-btn social-btn--ig" data-id="ig" data-url="https://www.instagram.com/somos_gestio/?__pwa=1#">
+                <span><i class="fa-brands fa-instagram me-1"></i> Instagram</span>
+                <i class="fa-solid fa-circle-notch status-icon"></i>
+              </button>
+              <button type="button" class="social-btn social-btn--tk" data-id="tk" data-url="https://www.tiktok.com/@somos_gestio">
+                <span><i class="fa-brands fa-tiktok me-1"></i> TikTok</span>
+                <i class="fa-solid fa-circle-notch status-icon"></i>
+              </button>
+              <button type="button" class="social-btn social-btn--yt" data-id="yt" data-url="https://www.youtube.com/@Somos_Gestiopro">
+                <span><i class="fa-brands fa-youtube me-1"></i> YouTube</span>
+                <i class="fa-solid fa-circle-notch status-icon"></i>
+              </button>
             </div>
+            <p class="social-status-msg" id="socialStatusMsg" style="font-size: 0.78rem; color: #ff2a6d; margin-top: 6px; font-weight: 700;">
+              ⚠️ Debes hacer clic en las 4 opciones superiores para habilitar el botón de registro.
+            </p>
           </div>
 
           <form id="ruletaForm">
@@ -774,9 +789,59 @@
         document.getElementById('winnerModal').classList.remove('show');
       });
 
+      // Tracking obligatorio de clic en las 4 redes sociales
+      const visitedSocials = { ws: false, ig: false, tk: false, yt: false };
+
+      document.querySelectorAll('#socialVerifyBox .social-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const id = btn.getAttribute('data-id');
+          const url = btn.getAttribute('data-url');
+          
+          if (url) window.open(url, '_blank');
+
+          if (id) {
+            visitedSocials[id] = true;
+            btn.classList.add('verified');
+            const icon = btn.querySelector('.status-icon');
+            if (icon) {
+              icon.className = 'fa-solid fa-circle-check status-icon';
+              icon.style.color = '#ffffff';
+            }
+          }
+
+          const count = Object.values(visitedSocials).filter(Boolean).length;
+          const title = document.getElementById('socialVerifyTitle');
+          const msg = document.getElementById('socialStatusMsg');
+
+          if (count < 4) {
+            if (title) title.innerHTML = `<i class="fa-solid fa-lock"></i> Requisito Obligatorio: Haz clic en las 4 redes para desbloquear (${count}/4)`;
+            if (msg) {
+              msg.style.color = '#ff2a6d';
+              msg.textContent = `⚠️ Te faltan ${4 - count} de las 4 opciones para habilitar el registro.`;
+            }
+          } else {
+            if (title) {
+              title.style.color = '#25d366';
+              title.innerHTML = `<i class="fa-solid fa-circle-check"></i> ✅ Requisitos Completados (4/4)`;
+            }
+            if (msg) {
+              msg.style.color = '#25d366';
+              msg.textContent = `¡Excelente! Ahora completa tus datos abajo y desbloquea la Ruleta.`;
+            }
+          }
+        });
+      });
+
       // Formulario de Registro
       document.getElementById('ruletaForm')?.addEventListener('submit', (e) => {
         e.preventDefault();
+
+        const count = Object.values(visitedSocials).filter(Boolean).length;
+        if (count < 4) {
+          alert('⚠️ Debes ingresar a las 4 opciones obligatorias (Comunidad WS, Instagram, TikTok y YouTube) para desbloquear el registro.');
+          document.getElementById('socialVerifyBox')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return;
+        }
 
         const name = document.getElementById('regName')?.value.trim();
         const company = document.getElementById('regCompany')?.value.trim();
