@@ -211,6 +211,12 @@ function closeLeadModal() {
 async function handleLeadSubmit(e) {
   e.preventDefault();
 
+  const submitBtn = document.getElementById('btnSubmitLead');
+  if (submitBtn) {
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Guardando...</span>';
+  }
+
   const name = document.getElementById('leadName')?.value.trim();
   const company = document.getElementById('leadCompany')?.value.trim();
   const email = document.getElementById('leadEmail')?.value.trim();
@@ -218,6 +224,10 @@ async function handleLeadSubmit(e) {
 
   if (!name || !company || !email || !phone) {
     showToast('Por favor completa todos los campos obligatorios', 'fa-solid fa-circle-exclamation');
+    if (submitBtn) {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Guardar</span>';
+    }
     return;
   }
 
@@ -239,23 +249,24 @@ async function handleLeadSubmit(e) {
     console.warn('LocalStorage unavailable', err);
   }
 
-  // 2. Post lead to CRM gestiodemo.gestio.pro API
+  // 2. Post lead to CRM gestiodemo.gestio.pro API with await
   try {
-    fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+    const params = new URLSearchParams();
+    params.append('nombre', name);
+    params.append('empresa', company);
+    params.append('email', email);
+    params.append('telefono', phone);
+    params.append('origen', 'Codigo promocional - Tarjeta Digital');
+
+    await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
-      body: JSON.stringify({
-        nombre: name,
-        empresa: company,
-        email: email,
-        telefono: phone,
-        origen: 'Codigo promocional - Tarjeta Digital'
-      })
-    }).catch(err => console.log('CRM API post:', err));
+      body: params.toString()
+    });
   } catch (err) {
-    // Silencioso
+    console.error('Error posting lead to CRM:', err);
   }
 
   // 3. Show confirmation message
@@ -263,6 +274,11 @@ async function handleLeadSubmit(e) {
 
   closeLeadModal();
   e.target.reset();
+
+  if (submitBtn) {
+    submitBtn.disabled = false;
+    submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Guardar</span>';
+  }
 
   // 4. Redirect to Gestio homepage after 2.5 seconds
   setTimeout(() => {
