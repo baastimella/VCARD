@@ -258,13 +258,16 @@ async function handleLeadSubmit(e) {
     params.append('telefono', phone);
     params.append('origen', 'Codigo promocional - Tarjeta Digital');
 
-    await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+    const response = await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
       },
       body: params.toString()
     });
+
+    const resJson = await response.json();
+    console.log('CRM Lead Registration Response:', resJson);
   } catch (err) {
     console.error('Error posting lead to CRM:', err);
   }
