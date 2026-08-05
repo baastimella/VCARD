@@ -190,6 +190,7 @@ body::before {
   max-width: 220px;
   object-fit: contain;
   display: block;
+  mix-blend-mode: screen;
 }
 
 .vcard__banner-img {
