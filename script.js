@@ -65,7 +65,6 @@ function renderCard() {
   // Info
   setText('profileName', contactData.fullName);
   setText('profileTitle', contactData.title);
-  setText('profileCompany', contactData.company);
   setText('profileBio', contactData.bio);
 
   // Contact Details
