@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Código Promocional & Descuento - Gestio</title>
+  <meta name="description" content="Regístrate para obtener tu Código Promocional y beneficio exclusivo en Gestio. Transformación digital, automatización e inteligencia para Pymes.">
+  <link rel="icon" href="assets/logogestio.jpeg" type="image/jpeg">
+
+  <!-- Google Fonts & Font Awesome -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --card-bg: rgba(15, 23, 42, 0.75);
+      --border-glass: rgba(56, 189, 248, 0.2);
+      --neon-cyan: #00f2fe;
+      --neon-purple: #818cf8;
+      --whatsapp-green: #25d366;
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --radius-lg: 20px;
+      --radius-md: 12px;
+      --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(0, 242, 254, 0.12) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(129, 140, 248, 0.12) 0px, transparent 50%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 15px;
+    }
+
+    .promo-card {
+      width: 100%;
+      max-width: 480px;
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-lg);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 242, 254, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .promo-header {
+      position: relative;
+      height: 140px;
+      overflow: hidden;
+    }
+
+    .promo-header__img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      filter: brightness(0.65);
+    }
+
+    .promo-header__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, transparent 0%, var(--bg-dark) 100%);
+    }
+
+    .promo-logo-wrapper {
+      position: absolute;
+      bottom: 15px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--neon-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.4);
+      padding: 6px 16px;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .promo-logo-img {
+      height: 28px;
+      width: auto;
+    }
+
+    .promo-body {
+      padding: 24px 22px 30px;
+    }
+
+    .promo-title {
+      font-size: 1.45rem;
+      font-weight: 800;
+      text-align: center;
+      background: linear-gradient(135deg, #ffffff 0%, var(--neon-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 6px;
+    }
+
+    .promo-subtitle {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      text-align: center;
+      line-height: 1.4;
+      margin-bottom: 22px;
+    }
+
+    /* --- Box de Comunidad & Redes --- */
+    .community-box {
+      background: linear-gradient(135deg, rgba(37, 211, 102, 0.12) 0%, rgba(0, 242, 254, 0.08) 100%);
+      border: 1px solid rgba(37, 211, 102, 0.35);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      margin-bottom: 22px;
+      text-align: center;
+    }
+
+    .community-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--whatsapp-green);
+      background: rgba(37, 211, 102, 0.18);
+      padding: 4px 12px;
+      border-radius: 50px;
+      margin-bottom: 10px;
+    }
+
+    .community-text {
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.45;
+      margin-bottom: 14px;
+    }
+
+    .community-btns {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .btn-community {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 10px;
+      background: linear-gradient(135deg, #25d366 0%, #128c7e 100%);
+      border-radius: var(--radius-md);
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.82rem;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+      transition: var(--transition);
+    }
+
+    .btn-community--direct {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+    }
+
+    .btn-community:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(37, 211, 102, 0.5);
+    }
+
+    .socials-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 6px;
+    }
+
+    .social-link {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(30, 41, 59, 0.8);
+      border: 1px solid var(--border-glass);
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+
+    .social-link:hover {
+      transform: translateY(-2px);
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+      box-shadow: 0 0 12px rgba(0, 242, 254, 0.4);
+    }
+
+    /* --- Formulario --- */
+    .form-group {
+      margin-bottom: 16px;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+    }
+
+    .form-label span.req {
+      color: var(--neon-cyan);
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 13px 15px;
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid var(--border-glass);
+      border-radius: var(--radius-md);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.92rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-input:focus {
+      border-color: var(--neon-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+      background: rgba(30, 41, 59, 0.95);
+    }
+
+    .btn-submit {
+      width: 100%;
+      padding: 15px;
+      margin-top: 8px;
+      background: linear-gradient(135deg, #00f2fe 0%, #4facfe 100%);
+      border: none;
+      border-radius: var(--radius-md);
+      color: #090d16;
+      font-weight: 800;
+      font-size: 0.95rem;
+      letter-spacing: 0.03em;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.4);
+      transition: var(--transition);
+    }
+
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(0, 242, 254, 0.6);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+    }
+
+    /* --- Seccion QR Exclusiva --- */
+    .qr-section {
+      margin-top: 28px;
+      padding-top: 22px;
+      border-top: 1px dashed rgba(255, 255, 255, 0.12);
+      text-align: center;
+    }
+
+    .qr-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 14px;
+    }
+
+    .qr-box {
+      background: #ffffff;
+      padding: 14px;
+      border-radius: 16px;
+      display: inline-block;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+      margin-bottom: 12px;
+    }
+
+    .qr-box img, .qr-box canvas {
+      display: block;
+      width: 150px;
+      height: 150px;
+    }
+
+    .btn-download-qr {
+      background: transparent;
+      border: 1px solid var(--border-glass);
+      color: var(--text-secondary);
+      padding: 8px 16px;
+      border-radius: 50px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: var(--transition);
+    }
+
+    .btn-download-qr:hover {
+      border-color: var(--neon-cyan);
+      color: var(--neon-cyan);
+    }
+
+    /* Toast */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: rgba(15, 23, 42, 0.95);
+      border: 1px solid var(--neon-cyan);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 50px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(0, 242, 254, 0.3);
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 9999;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    .footer-note {
+      text-align: center;
+      margin-top: 18px;
+      font-size: 0.78rem;
+      color: var(--text-muted);
+    }
+
+    .footer-note a {
+      color: var(--neon-cyan);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="promo-card">
+    <div class="promo-header">
+      <img src="assets/fondogestio.jpeg" alt="Fondo Gestio" class="promo-header__img">
+      <div class="promo-header__overlay"></div>
+      <div class="promo-logo-wrapper">
+        <img src="assets/logogestio.jpeg" alt="Gestio Logo" class="promo-logo-img">
+      </div>
+    </div>
+
+    <div class="promo-body">
+      <h1 class="promo-title">Código Promocional</h1>
+      <p class="promo-subtitle">Regístrate para obtener tu descuento exclusivo y acceder a soluciones tecnológicas para tu empresa.</p>
+
+      <!-- Comunidad de WhatsApp & Redes -->
+      <div class="community-box">
+        <div class="community-badge"><i class="fa-solid fa-gift"></i> Descuento Especial</div>
+        <p class="community-text">Únete a nuestra comunidad oficial de WhatsApp o escríbenos para validar tu beneficio:</p>
+        
+        <div class="community-btns">
+          <a href="https://chat.whatsapp.com/J3YOBt77jQ5FCTQ3FeUbYl" target="_blank" rel="noopener noreferrer" class="btn-community">
+            <i class="fa-brands fa-whatsapp"></i>
+            <span>Grupo Comunidad</span>
+          </a>
+          <a href="https://wa.me/56928786139?text=Hola%20Gestio,%20quiero%20unirme%20a%20la%20comunidad%20y%20activar%20mi%20descuento" target="_blank" rel="noopener noreferrer" class="btn-community btn-community--direct">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span>Chat Directo</span>
+          </a>
+        </div>
+
+        <p class="community-text" style="font-size: 0.78rem; margin-bottom: 6px;">¡Síguenos en redes sociales!</p>
+        <div class="socials-row">
+          <a href="https://www.instagram.com/somos_gestio/?__pwa=1#" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a href="https://www.tiktok.com/@somos_gestio" target="_blank" rel="noopener noreferrer" class="social-link" title="TikTok">
+            <i class="fa-brands fa-tiktok"></i>
+          </a>
+          <a href="https://www.youtube.com/@Somos_Gestiopro" target="_blank" rel="noopener noreferrer" class="social-link" title="YouTube">
+            <i class="fa-brands fa-youtube"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Formulario Código Promocional -->
+      <form id="promoForm">
+        <div class="form-group">
+          <label for="promoName" class="form-label">Nombre <span class="req">*</span></label>
+          <input type="text" id="promoName" class="form-input" placeholder="Tu nombre completo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="promoCompany" class="form-label">Empresa o Nombre de Proyecto <span class="req">*</span></label>
+          <input type="text" id="promoCompany" class="form-input" placeholder="Nombre de tu empresa o proyecto" required>
+        </div>
+
+        <div class="form-group">
+          <label for="promoEmail" class="form-label">Email <span class="req">*</span></label>
+          <input type="email" id="promoEmail" class="form-input" placeholder="ejemplo@correo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="promoPhone" class="form-label">Fono (+56) <span class="req">*</span></label>
+          <input type="tel" id="promoPhone" class="form-input" placeholder="+56 9 1234 5678" required>
+        </div>
+
+        <button type="submit" class="btn-submit" id="btnSubmitPromo">
+          <i class="fa-solid fa-floppy-disk"></i>
+          <span>Guardar y Activar Descuento</span>
+        </button>
+      </form>
+
+      <!-- Sección QR Aparte -->
+      <div class="qr-section">
+        <div class="qr-title"><i class="fa-solid fa-qrcode me-1"></i> QR Único de este Formulario</div>
+        <div class="qr-box" id="promoQrContainer"></div>
+        <div>
+          <button class="btn-download-qr" id="btnDownloadQr">
+            <i class="fa-solid fa-download"></i> Descargar QR Promocional
+          </button>
+        </div>
+      </div>
+
+      <div class="footer-note">
+        Desarrollado por <a href="https://gestio.pro" target="_blank">Gestio.pro</a> — Transformación Digital
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toastMsg">
+    <i class="fa-solid fa-circle-check" style="color: var(--neon-cyan);"></i>
+    <span id="toastText">¡Datos enviados con éxito!</span>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Generar QR exclusivo para este formulario
+      const currentUrl = window.location.href;
+      const qrContainer = document.getElementById('promoQrContainer');
+      
+      let qrCodeObj = null;
+      if (qrContainer) {
+        qrCodeObj = new QRCode(qrContainer, {
+          text: currentUrl,
+          width: 150,
+          height: 150,
+          colorDark: '#090d16',
+          colorLight: '#ffffff',
+          correctLevel: QRCode.CorrectLevel.H
+        });
+      }
+
+      // Descargar QR
+      document.getElementById('btnDownloadQr')?.addEventListener('click', () => {
+        const qrCanvas = qrContainer.querySelector('canvas');
+        const qrImg = qrContainer.querySelector('img');
+        const imageUri = qrCanvas ? qrCanvas.toDataURL('image/png') : (qrImg ? qrImg.src : null);
+
+        if (imageUri) {
+          const a = document.createElement('a');
+          a.href = imageUri;
+          a.download = 'QR_Codigo_Promocional_Gestio.png';
+          a.click();
+        }
+      });
+
+      // 2. Submit Formulario
+      document.getElementById('promoForm')?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const btn = document.getElementById('btnSubmitPromo');
+        if (btn) {
+          btn.disabled = true;
+          btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Guardando...</span>';
+        }
+
+        const name = document.getElementById('promoName')?.value.trim();
+        const company = document.getElementById('promoCompany')?.value.trim();
+        const email = document.getElementById('promoEmail')?.value.trim();
+        const phone = document.getElementById('promoPhone')?.value.trim();
+
+        if (!name || !company || !email || !phone) {
+          showToast('Por favor completa todos los campos');
+          if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Guardar y Activar Descuento</span>';
+          }
+          return;
+        }
+
+        // Post lead to CRM API gestiodemo.gestio.pro
+        try {
+          const params = new URLSearchParams();
+          params.append('nombre', name);
+          params.append('empresa', company);
+          params.append('email', email);
+          params.append('telefono', phone);
+          params.append('origen', 'Codigo promocional');
+
+          await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+            },
+            body: params.toString()
+          });
+        } catch (err) {
+          console.error('Error posting lead to CRM:', err);
+        }
+
+        showToast('¡Datos enviados con éxito y correo despachado! Redirigiendo a Gestio...');
+        e.target.reset();
+
+        setTimeout(() => {
+          window.location.href = 'https://gestio.pro';
+        }, 2500);
+      });
+    });
+
+    function showToast(msg) {
+      const toast = document.getElementById('toastMsg');
+      const text = document.getElementById('toastText');
+      if (toast && text) {
+        text.textContent = msg;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 4000);
+      }
+    }
+  </script>
+</body>
+</html>
