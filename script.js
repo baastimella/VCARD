@@ -214,29 +214,31 @@ async function handleLeadSubmit(e) {
   const submitBtn = document.getElementById('btnSubmitLead');
   if (submitBtn) {
     submitBtn.disabled = true;
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Guardando...</span>';
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> <span>Enviando...</span>';
   }
 
-  const name = document.getElementById('leadName')?.value.trim();
-  const company = document.getElementById('leadCompany')?.value.trim();
-  const email = document.getElementById('leadEmail')?.value.trim();
-  const phone = document.getElementById('leadPhone')?.value.trim();
+  const name = document.getElementById('leadName')?.value.trim() || '';
+  const company = document.getElementById('leadCompany')?.value.trim() || '';
+  const email = document.getElementById('leadEmail')?.value.trim() || '';
+  const phone = document.getElementById('leadPhone')?.value.trim() || '';
+  const note = document.getElementById('leadNote')?.value.trim() || '';
 
-  if (!name || !company || !email || !phone) {
-    showToast('Por favor completa todos los campos obligatorios', 'fa-solid fa-circle-exclamation');
+  if (!name || !email || !phone) {
+    showToast('Por favor completa los campos obligatorios', 'fa-solid fa-circle-exclamation');
     if (submitBtn) {
       submitBtn.disabled = false;
-      submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Guardar</span>';
+      submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Enviar Datos</span>';
     }
     return;
   }
 
   const newLead = {
     name,
-    company,
+    company: company || name,
     email,
     phone,
-    origen: 'Codigo promocional',
+    note,
+    origen: 'Contacto Directo - Tarjeta Digital',
     timestamp: new Date().toISOString()
   };
 
@@ -253,10 +255,11 @@ async function handleLeadSubmit(e) {
   try {
     const params = new URLSearchParams();
     params.append('nombre', name);
-    params.append('empresa', company);
+    params.append('empresa', company || name);
     params.append('email', email);
     params.append('telefono', phone);
-    params.append('origen', 'Codigo promocional - Tarjeta Digital');
+    params.append('nota', note);
+    params.append('origen', 'Contacto Directo - Tarjeta Digital');
 
     const response = await fetch('https://gestiodemo.gestio.pro/api/crm/registrar_lead_publico.php', {
       method: 'POST',
@@ -267,7 +270,7 @@ async function handleLeadSubmit(e) {
     });
 
     const resJson = await response.json();
-    console.log('CRM Lead Registration Response:', resJson);
+    console.log('CRM Contacto Directo Response:', resJson);
   } catch (err) {
     console.error('Error posting lead to CRM:', err);
   }
@@ -280,7 +283,7 @@ async function handleLeadSubmit(e) {
 
   if (submitBtn) {
     submitBtn.disabled = false;
-    submitBtn.innerHTML = '<i class="fa-solid fa-floppy-disk"></i> <span>Guardar</span>';
+    submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> <span>Enviar Datos</span>';
   }
 
   // 4. Redirect to Gestio homepage after 2.5 seconds
